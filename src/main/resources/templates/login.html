@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>System Login</title>
+<link rel="stylesheet"
+	href="/resources/bootstrap/4.0.0/bootstrap.min.css">
+<script src="/resources/jquery/3.2.1/jquery.slim.min.js"></script>
+<script src="/resources/bootstrap/4.0.0/bootstrap.min.js"></script>
+
+<style>
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #75c35d;
+}
+
+.card_login {
+	width: 480px;
+	background: white;;
+	margin: 0 auto; /*水平居中*/
+	position: relative; /*脱离文档流*/
+	top: 50%; /*偏移*/
+	margin-top: -150px;
+	box-shadow: 0px 3px 7px 2px rgba(0, 0, 0, 0.5);
+}
+
+.form-control-login {
+	border-radius: 0px;
+	line-height: 2;
+}
+
+.btn-login {
+	width: 100%;
+	line-height: 2;
+}
+
+.login-item {
+	margin-top: 20px;
+}
+
+.login-title {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="card_login">
+		<form action="/login" method="post" id="login_form">
+			<div class="card-body">
+				<div class="login-item login-title">
+					<h5>System Login</h5>
+				</div>
+				<div class="login-item">
+					<input type="text" class="form-control form-control-login"
+						placeholder="Email" name="username">
+				</div>
+				<div class="login-item">
+					<input type="password" class="form-control form-control-login"
+						placeholder="password">
+				</div>
+				<div class="login-item">
+					<button type="button" class="btn btn-success btn-login"
+						id="login_submit">Login</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+<script>
+	$("login_submit").click(function() {
+		alert("submit");
+	});
+</script>
+</html>

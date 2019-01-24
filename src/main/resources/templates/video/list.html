@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Video.js 7.4.1</title>
+<link href="/resources/video/video-js.min.css" rel="stylesheet">
+<style>
+body {
+	background-color: #ffffff;
+}
+
+.m {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+</head>
+
+<body>
+	<div class="m">
+
+		<table>
+			<tr>
+				<th>视频名</th>
+				<th>路径</th>
+				<th>视频长度</th>
+				<th>视频后缀名</th>
+			</tr>
+			<tr th:each="prod:${videos}">
+				<td th:text="${prod.name}">醋溜土豆丝</td>
+				<td th:text="${prod.path}">2.41</td>
+				<td th:text="${prod.length}">yes</td>
+				<td th:text="${prod.suffix}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
