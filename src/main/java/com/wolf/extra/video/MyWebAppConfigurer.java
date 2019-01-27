@@ -41,6 +41,7 @@ public class MyWebAppConfigurer implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/video/**").addResourceLocations("classpath:/static/video/");
         registry.addResourceHandler("/resources/bootstrap/4.0.0/**").addResourceLocations("classpath:/static/bootstrap/4.0.0/");
         registry.addResourceHandler("/resources/jquery/3.2.1/**").addResourceLocations("classpath:/static/jquery/3.2.1/");
+        registry.addResourceHandler("/resources/jquery/3.3.1/**").addResourceLocations("classpath:/static/jquery/3.3.1/");
         registry.addResourceHandler("/resources/popper/1.12.9/**").addResourceLocations("classpath:/static/popper/1.12.9/");
 
         if (mImagesPath.equals("") || mImagesPath.equals("${cbs.imagesPath}")) {

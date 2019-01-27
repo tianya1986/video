@@ -57,11 +57,11 @@ html, body {
 				</div>
 				<div class="login-item">
 					<input type="text" class="form-control form-control-login"
-						placeholder="Email" name="username">
+						placeholder="Email" name="username" id="username">
 				</div>
 				<div class="login-item">
 					<input type="password" class="form-control form-control-login"
-						placeholder="password">
+						placeholder="password" id="password">
 				</div>
 				<div class="login-item">
 					<button type="button" class="btn btn-success btn-login"
@@ -72,9 +72,10 @@ html, body {
 	</div>
 </body>
 
-<script>
-	$("login_submit").click(function() {
-		alert("submit");
+<script type="text/javascript">
+	$("#login_submit").click(function() {
+		$("#username").value();
+
 	});
 </script>
 </html>
