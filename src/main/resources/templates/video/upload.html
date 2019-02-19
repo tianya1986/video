@@ -63,7 +63,7 @@
 		uploadFile();
 	});
 	function uploadFile() {
-		var url = "/upload";
+		var url = "/video/upload";
 		var fileObj = fileBtn.get(0).files[0];
 		if (fileObj == null) {
 			alert("请选择文件");
@@ -128,12 +128,14 @@
 		function uploadComplete(evt) {
 			uploadBtn.attr('disabled', false);
 			console.log('上传完成')
+			alert("上传成功");
 		}
 		;
 
 		//上传失败回调            
 		function uploadFailed(evt) {
 			console.log('上传失败' + evt.target.responseText);
+			alert('上传失败' + evt.target.responseText);
 		}
 
 		//终止上传      

@@ -11,16 +11,16 @@ import java.util.List;
 @Service("videoService")
 public class VideoServiceImpl implements VideoService {
 
-    @Autowired
-    private VideoDao videoDao;
+	@Autowired
+	private VideoDao videoDao;
 
-    @Override
-    public List<Video> findAll() {
-        return videoDao.findAll();
-    }
+	@Override
+	public List<Video> findAll() {
+		return videoDao.findAll();
+	}
 
-    @Override
-    public void save(Video video) {
-        videoDao.saveVideo(video);
-    }
+	@Override
+	public void save(Video video) {
+		videoDao.saveVideo(video);
+	}
 }

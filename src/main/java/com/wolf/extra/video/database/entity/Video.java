@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class Video implements Serializable {
 
+	
+	private String _id;
+	
 	/**
 	 * 视频名
 	 */
@@ -17,7 +20,7 @@ public class Video implements Serializable {
 	/**
 	 * 视频长度
 	 */
-	private int length;
+	private long length;
 
 	/**
 	 * 文件后缀名
@@ -40,11 +43,11 @@ public class Video implements Serializable {
 		this.path = path;
 	}
 
-	public int getLength() {
+	public long getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
+	public void setLength(long length) {
 		this.length = length;
 	}
 
@@ -55,4 +58,10 @@ public class Video implements Serializable {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
+
+	public String getId() {
+		return _id;
+	}
+	
+	
 }

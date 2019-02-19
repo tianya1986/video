@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Video.js 7.4.1</title>
+<link rel="stylesheet"
+	href="/resources/bootstrap/4.0.0/bootstrap.min.css">
+<script src="/resources/jquery/3.3.1/jquery.min.js"></script>
+<script src="/resources/bootstrap/4.0.0/bootstrap.min.js"></script>
+<style>
+body {
+	background-color: #ffffff;
+}
+
+.m {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div>
+			<a href="./video/upload"><button type="button"
+					class="btn btn-primary">上传视频</button></a>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>视频名</th>
+					<th>路径</th>
+					<th>长度</th>
+					<th>后缀名</th>
+				</tr>
+			</thead>
+			<tbody id="videos">
+			</tbody>
+		</table>
+	</div>
+</body>
+
+<script>
+	$.get("/video/list", function(result) {
+		var json = "";
+		if (result != null) {
+			for (var i = 0; i < result.length; i++) {
+				json += "<tr>"
+				json += "<td><a href='/video/play?videoId=" + result[i].name + "'>" + result[i].name + "</a></td>"
+				json += "<td>" + result[i].path + "</td>"
+				json += "<td>" + result[i].length + "</td>"
+				json += "<td>" + result[i].suffix + "</td>"
+				json += "</tr>"
+			}
+		}
+		$("#videos").html(json);
+	});
+</script>
+</html>

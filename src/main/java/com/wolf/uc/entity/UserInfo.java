@@ -15,32 +15,47 @@ import java.io.Serializable;
  */
 public class UserInfo implements Serializable {
 
-    private static final long serialVersionUID = 9028994540627116243L;
+	private static final long serialVersionUID = 9028994540627116243L;
 
-    /**
-     * 用户名
-     */
-    private String name;
+	/**
+	 * 用户名
+	 */
+	private String name;
 
-    /**
-     * 用户年龄
-     */
-    private int age;
+	/**
+	 * 用户年龄
+	 */
+	private int age;
 
-    public String getName() {
-        return name;
-    }
+	/**
+	 * 密码
+	 */
+	private String password;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 
 }
