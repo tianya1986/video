@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wolf.extra.video.database.entity.User;
+import com.wolf.cs.Dentry;
 import com.wolf.extra.video.database.entity.Video;
 import com.wolf.extra.video.service.VideoService;
 
@@ -25,7 +24,7 @@ public class VideoController {
 
 	@Autowired
 	private VideoService videoService;
-
+	
 	@Value("${cbs.imagesPath}")
 	private String mImagesPath;
 
@@ -35,8 +34,8 @@ public class VideoController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<Video> listUser(Model model) {
-		List<Video> list = videoService.findAll();
+	public List<Dentry> listUser(Model model) {
+		List<Dentry> list = null;
 		model.addAttribute("videos", list);
 		return list;
 	}
@@ -67,8 +66,8 @@ public class VideoController {
 
 			Video video = new Video();
 			video.setName(dest.getName());
-			video.setPath(filePath);
-			video.setLength(file.getSize());
+//			video.setPath(filePath);
+//			video.setSize(file.getSize());
 			videoService.save(video);
 			return "success";
 		} catch (Exception e) {

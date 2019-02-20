@@ -1,67 +1,103 @@
 package com.wolf.extra.video.database.entity;
 
-import java.io.Serializable;
+/**
+ * 视频信息
+ */
+public class Video {
 
-public class Video implements Serializable {
+    @SuppressWarnings("unused")
+    private String _id;
 
-	
-	private String _id;
-	
-	/**
-	 * 视频名
-	 */
-	private String name;
+    /**
+     * 视频id （UUID）
+     */
+    private String videoId;
 
-	/**
-	 * 路径
-	 */
-	private String path;
+    /**
+     * 文件id
+     */
+    private String dentryId;
 
-	/**
-	 * 视频长度
-	 */
-	private long length;
+    /**
+     * 视频名称
+     */
+    private String name;
 
-	/**
-	 * 文件后缀名
-	 */
-	private String suffix;
+    /**
+     * 价格
+     */
+    private float price;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * 短地址
+     */
+    private String shortURL;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * 视频状态
+     */
+    private int status;
 
-	public String getPath() {
-		return path;
-	}
+    /**
+     * 视频创建时间
+     */
+    private long createTime;
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public String getVideoId() {
+        return videoId;
+    }
 
-	public long getLength() {
-		return length;
-	}
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
 
-	public void setLength(long length) {
-		this.length = length;
-	}
+    public String getDentryId() {
+        return dentryId;
+    }
 
-	public String getSuffix() {
-		return suffix;
-	}
+    public void setDentryId(String dentryId) {
+        this.dentryId = dentryId;
+    }
 
-	public void setSuffix(String suffix) {
-		this.suffix = suffix;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getId() {
-		return _id;
-	}
-	
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getShortURL() {
+        return shortURL;
+    }
+
+    public void setShortURL(String shortURL) {
+        this.shortURL = shortURL;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+
 }
