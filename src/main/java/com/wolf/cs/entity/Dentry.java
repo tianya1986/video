@@ -1,4 +1,4 @@
-package com.wolf.cs;
+package com.wolf.cs.entity;
 
 import java.io.Serializable;
 

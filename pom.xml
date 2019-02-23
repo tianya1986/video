@@ -45,12 +45,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
-			<version>1.2.2.RELEASE</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -66,5 +60,13 @@
 
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>aliyun-repos</id>
+			<name>aliyun Releases</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
 
 </project>

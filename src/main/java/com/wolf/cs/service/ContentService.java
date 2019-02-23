@@ -3,7 +3,7 @@ package com.wolf.cs.service;
 import java.util.List;
 
 import com.wolf.cs.ContentException;
-import com.wolf.cs.Dentry;
+import com.wolf.cs.entity.Dentry;
 
 /**
  * 内容服务方法

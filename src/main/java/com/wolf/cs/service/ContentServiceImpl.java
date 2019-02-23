@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.wolf.cs.ContentException;
-import com.wolf.cs.Dentry;
+import com.wolf.cs.entity.Dentry;
 
 /**
  * 内容服务方法
