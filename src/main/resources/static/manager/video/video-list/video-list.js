@@ -1,20 +1,80 @@
 (function a() {
-	$.get("/video/list", function(data, status) {
-		var $videoTable = $("#simple-table > tbody");
+	$.get("/video/list",
+	function(data, status) {
+		var $tbody = $("#simple-table > tbody");
+		var items = data.items;
 		var html = "";
 		if (data != null) {
-			for (var i = 0, len = data.length; i < len; i++) {
-				html += "<tr>";
-				html += "<td class=\"center\"><label class=\"pos-rel\"> <input type=\"checkbox\" class=\"ace\" /> <span class=\"lbl\"></span></label></td>";
-				html += "<td><a href=\"#\">" + data[i].name + "</a></td>"; // 名称
-				html += "<td>$45</td>"; // 价格
-				html += "<td class=\"hidden-480\">3,330</td>"; // 点击次数
-				html += "<td>Feb 12</td>"; // 更新时间
-				html += "<td class=\"hidden-480\"><span class=\"label label-sm label-warning\">Expiring</span></td>"; // 状态
-				html += "<th>操作</th>"; // 操作
+			for (var i = 0, len = items.length; i < len; i++) {
+				var $tr = $("<tr>");
+				createItem(items[i], $tr);
+				$tbody.append($tr);
 			}
 		}
 		
-		$videoTable.html(html);
+		function createItem(video, $tr){
+			$tr.empty();
+			$tr.append("<td><a href='/manager/video/play/play.html?videoId=" + video.videoId + "' target='_blank'>" + video.name + "</a></td>"); // 名称
+			$tr.append("<td class='center'>" + video.price + "元</td>"); // 价格
+			$tr.append("<td class='center'>" + video.clickNumber + "</td>"); // 点击次数
+			$tr.append("<td class='center'>" + getStatusName(video.status) + "</td>"); // 状态
+			
+			var shortURL = video.shortURL==null?"":video.shortURL; 
+			$tr.append("<td><a href='" + shortURL + "' target='_blank'>" + shortURL + "</a></td>"); // 短地址
+			$tr.append("<td>" + dataFormat(video.createTime) + "</td>"); // 更新时间
+			
+			if(video.status == "0"){
+				var $button = $("<button class='btn btn-xs btn-success'>上架</button>");
+				$button.click(video.videoId, function(event){
+					var $this = $(this);
+					$this.attr("disabled","disabled");
+					var videoId = event.data; 
+					$.post("/video/" + videoId + "/action/onsale",{price:5},function(video){
+					    $this.removeAttr("disabled")
+					    createItem(video, $this.parent().parent());
+					});
+				});
+				var $td = $("<td>")
+				$td.append($button);
+				$tr.append($td);
+			} else if (video.status == "1" || video.status == "2"){
+				var $button = $("<button class='btn btn-xs btn-danger'>下架</button>");
+				$button.click(video.videoId, function(event){
+					var $this = $(this);
+					$this.attr("disabled","disabled");
+					var videoId = event.data; 
+					$.post("/video/" + videoId + "/action/offsale",{},function(video){
+					    $this.removeAttr("disabled")
+					    createItem(video, $this.parent().parent());
+					});
+				});
+				var $td = $("<td>")
+				$td.append($button);
+				$tr.append($td);
+			}
+			
+		}
 	});
+	
+	function dataFormat(time){
+		 var date = new Date(time);
+		 var dateString = (date.getFullYear())
+		 + "-" + (date.getMonth() + 1)
+		 + "-" + (date.getDate()) + " "
+		 + (date.getHours()) + ":"
+		 + (date.getMinutes()) + ":"
+		 + (date.getSeconds());
+		 return dateString;
+	}
+	
+	function getStatusName(status){
+		 if (status == "0") {
+			 return "未上架";
+		 } else if (status == "1") {
+			 return "付费";
+		 } else if (status == "2") {
+			 return "免费";
+		 }
+	}
+
 })();

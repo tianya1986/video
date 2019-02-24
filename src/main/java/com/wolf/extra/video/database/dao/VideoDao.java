@@ -45,6 +45,6 @@ public interface VideoDao {
      * @return
      * @throws VideoException
      */
-    public Result<Video> query(int offset, int limit, int status) throws VideoException;
+    public Result<Video> query(int offset, int limit, String status) throws VideoException;
 
 }

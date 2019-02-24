@@ -18,7 +18,11 @@
 	class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" href="/manager/assets/css/ace-skins.min.css" />
 <link rel="stylesheet" href="/manager/assets/css/ace-rtl.min.css" />
-
+<style>
+.table>tbody>tr>td {
+	vertical-align:middle;
+}
+</style>
 </head>
 <body class="no-skin">
 	<include src="../layout/navbar.html"></include>
@@ -42,7 +46,8 @@
 						<div class="clearfix">
 
 							<div class="pull-right">
-								<a href="/manager/video/upload/upload.html"><button type="button" class="btn btn-sm btn-success">上传</button></a>
+								<a href="/manager/video/upload/upload.html"><button
+										type="button" class="btn btn-sm btn-success">上传</button></a>
 							</div>
 						</div>
 					</div>
@@ -50,24 +55,19 @@
 
 					<div class="row">
 						<div class="col-xs-12">
-							<table id="simple-table"
-								class="table  table-bordered table-hover">
+							<table id="simple-table" class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										<th class="center"><label class="pos-rel"> <input
-												type="checkbox" class="ace" /> <span class="lbl"></span>
-										</label></th>
 										<th>名称</th>
-										<th>价格</th>
-										<th class="hidden-480">点击量</th>
-
-										<th><i
-											class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-											更新时间</th>
-										<th class="hidden-480">状态</th>
+										<th class="center">价格</th>
+										<th class="center">点击量</th>
+										<th class="center">状态</th>
+										<th>短地址</th>
+										<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>上传时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
+
 								<tbody>
 								</tbody>
 							</table>
@@ -77,7 +77,7 @@
 				</div>
 				<!-- /.page-content -->
 			</div>
-		</div> 
+		</div>
 		<!-- /.main-content -->
 	</div>
 
@@ -90,14 +90,6 @@
 							+ "<"+"/script>");
 	</script>
 	<script src="/manager/assets/js/bootstrap.min.js"></script>
-
-	<script src="/manager/assets/js/jquery-ui.custom.min.js"></script>
-	<script src="/manager/assets/js/jquery.ui.touch-punch.min.js"></script>
-	<script src="/manager/assets/js/jquery.easypiechart.min.js"></script>
-	<script src="/manager/assets/js/jquery.sparkline.index.min.js"></script>
-	<script src="/manager/assets/js/jquery.flot.min.js"></script>
-	<script src="/manager/assets/js/jquery.flot.pie.min.js"></script>
-	<script src="/manager/assets/js/jquery.flot.resize.min.js"></script>
 
 	<!-- ace scripts -->
 	<script src="/manager/assets/js/ace-elements.min.js"></script>

@@ -1,12 +1,16 @@
 package com.wolf.extra.video.controller;
 
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import paging.Result;
+
+import com.wolf.common.utils.FileUtil;
+import com.wolf.cs.CSConfig;
+import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
-import com.wolf.cs.helper.DentryHelper;
+import com.wolf.cs.service.ContentService;
+import com.wolf.extra.video.Status;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
 import com.wolf.extra.video.entity.ShortURL;
@@ -29,66 +39,172 @@ import com.wolf.extra.video.service.VideoService;
 @RequestMapping("/video")
 public class VideoController {
 
-    @Autowired
-    private VideoService videoService;
+	@Autowired
+	private ContentService contentService; // cs服务
 
-    @Autowired
-    private ShortURLService shortURLService;
+	@Autowired
+	private VideoService videoService; // 视频服务
 
-    @Value("${content.service.path.video}")
-    private String mVideoPath; // 视频地址
+	@Autowired
+	private ShortURLService shortURLService; // 短地址服务
 
-    @RequestMapping("/play")
-    public ModelAndView getUser() {
-        return new ModelAndView("/video/play");
-    }
+	@Value("${content.service.path.video}")
+	private String mVideoPath; // 视频地址
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<Dentry> listUser(Model model) {
-        try {
-            ShortURL url = shortURLService.getShortURL("https://fanyi.baidu.com/");
-            System.out.println("======================== short url " + url.getData());
-        } catch (VideoException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        List<Dentry> list = null;
-        model.addAttribute("videos", list);
-        return list;
-    }
+	@RequestMapping(value = "/{videoId}")
+	public Video getVideo(@PathVariable("videoId") String videoId) {
+		Video video = null;
+		try {
+			video = videoService.load(videoId);
+			Dentry dentry = contentService.load(video.getDentryId());
+			video.setDentry(dentry);
+		} catch (VideoException e) {
+			e.printStackTrace();
+		} catch (ContentException e) {
+			e.printStackTrace();
+		}
+		return video;
+	}
 
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public ModelAndView goUpdate() {
-        return new ModelAndView("video/upload");
-    }
+	/**
+	 * 上架
+	 * @param dentryId
+	 * @return
+	 */
+	@RequestMapping(value = "/{videoId}/action/onsale", method = RequestMethod.POST)
+	public Video onSale(HttpServletRequest request,
+			@PathVariable("videoId") String videoId,
+			@RequestParam(value = "price", required = true) float price) {
+		Video video = null;
+		try {
+			video = videoService.load(videoId);
+			if (video != null) {
+				InetAddress address = null;
+				try {
+					address = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String uploadFile(@RequestParam("file") MultipartFile file) {
-        if (file == null || file.isEmpty()) {
-            return "file is empty";
-        }
-        // 获取文件名
-        String fileName = file.getOriginalFilename();
-        // 文件存储路径
-        String filePath = mVideoPath + UUID.randomUUID().toString().replaceAll("-", "") + "_" + fileName;
-        // logger.info("save file to:" + filePath);
-        File dest = new File(filePath);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
-        try {
-            file.transferTo(dest);
+				String hostAddress = address.getHostAddress();
+				String videoUrl = "http://" + hostAddress + ":"
+						+ request.getServerPort()
+						+ "/manager/video/play/play.html?videoId="
+						+ video.getVideoId();
+				System.out.println("===============hostAddress " + hostAddress);
+				System.out.println("===============videoUrl " + videoUrl);
 
-            Video video = new Video();
-            video.setName(dest.getName());
-            // video.setPath(filePath);
-            // video.setSize(file.getSize());
-            videoService.save(video);
-            return "success";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "fail";
-    }
+				ShortURL shortURL = shortURLService.getShortURL(videoUrl);
+				System.out.println("===============shortURL "
+						+ shortURL.getData());
+				video.setPrice(price);
+				if (price == 0) {
+					video.setStatus(Status.ON_FREE); // 免费
+					video = videoService
+							.onSaleFree(videoId, shortURL.getData());
+				} else {
+					video.setStatus(Status.ON_SALE); // 收费
+					video = videoService.onSale(videoId, shortURL.getData(),
+							price);
+				}
+			}
+		} catch (VideoException e) {
+			e.printStackTrace();
+		}
+		return video;
+	}
+
+	/**
+	 * 下架
+	 * @param dentryId
+	 * @return
+	 */
+	@RequestMapping(value = "/{videoId}/action/offsale", method = RequestMethod.POST)
+	public Video offSale(@PathVariable("videoId") String videoId) {
+		Video video = null;
+		try {
+			video = videoService.load(videoId);
+			if (video != null) {
+				video = videoService.offSale(videoId);
+			}
+		} catch (VideoException e) {
+			e.printStackTrace();
+		}
+		return video;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public Result<Video> listUser(
+			HttpServletRequest request,
+			@RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
+			@RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(name = "status", required = false) String status) {
+		Result<Video> result = null;
+		try {
+			result = videoService.query(offset, limit, status);
+		} catch (VideoException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public ModelAndView goUpdate() {
+		return new ModelAndView("video/upload");
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String uploadFile(@RequestParam("file") MultipartFile file) {
+		if (file == null || file.isEmpty()) {
+			return "file is empty";
+		}
+
+		// 存储视频文件到CS服务器
+		String fileName = file.getOriginalFilename(); // 文件名
+		String dentryId = UUID.randomUUID().toString().replaceAll("-", ""); // 文件UUID
+		int fileType = CSConfig.DentryType.FILE; // 文件类型
+		long fileSize = file.getSize(); // 文件大小
+		String contentType = file.getContentType(); // mime
+		String suffix = FileUtil.getSuffix(fileName); // 拓展名
+		String filePath = mVideoPath + File.separator + dentryId + "_"
+				+ fileName; // 文件存储路径
+
+		File target = new File(filePath);
+		try {
+			FileUtil.transferTo(file, target); // 保存文件
+
+			Dentry dentry = new Dentry();
+			dentry.setName(fileName); // 文件名
+			dentry.setDentryId(dentryId); // 文件UUID
+			dentry.setType(fileType); // 文件类型
+			dentry.setMime(contentType); // 拓展名
+			dentry.setSuffix(suffix); // 拓展名
+			dentry.setSize(fileSize); // 文件大小
+			dentry.setCreateTime(System.currentTimeMillis()); // 创建时间
+			dentry.setPath(filePath); // 文件存储路径
+
+			dentry = contentService.save(dentry);
+
+			Video video = new Video();
+			video.setDentryId(dentryId); // 文件UUID
+			video.setVideoId(UUID.randomUUID().toString().replaceAll("-", ""));
+			video.setName(fileName);
+			video.setPrice(0f);
+			video.setStatus(Status.OFF_SALE); // 默认：下架
+			video.setCreateTime(System.currentTimeMillis()); // 创建时间
+			videoService.save(video);
+
+			return "success";
+		} catch (IllegalStateException e) {// 文件存储失败
+			e.printStackTrace();
+		} catch (IOException e) {// 文件存储失败
+			e.printStackTrace();
+		} catch (ContentException e) {// dentry存储失败
+			e.printStackTrace();
+		} catch (VideoException e) { // 保存视频失败
+			e.printStackTrace();
+		}
+		return "fail";
+	}
 
 }

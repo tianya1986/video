@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
+import com.wolf.extra.video.database.entity.Video;
 
 /**
  * 内容服务方法
@@ -14,26 +18,32 @@ import com.wolf.cs.entity.Dentry;
  * 1. 保存文件
  * 2. 读取文件信息
  */
+@Service("contentSerivce")
 public class ContentServiceImpl implements ContentService {
 
-    /**
-     * mongo访问类
-     */
-    @Autowired
-    private MongoTemplate mongoTemplate;
+	/**
+	 * mongo访问类
+	 */
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
-    @Override
-    public void save(Dentry dentry) throws ContentException {
-        mongoTemplate.save(dentry);
-    }
+	@Override
+	public Dentry save(Dentry dentry) throws ContentException {
+		return mongoTemplate.save(dentry);
+	}
 
-    @Override
-    public Dentry load(String dentryId) throws ContentException {
-        return null;
-    }
+	@Override
+	public Dentry load(String dentryId) throws ContentException {
+		Query query = new Query(Criteria.where("dentryId").is(dentryId));
+		List<Dentry> list = mongoTemplate.find(query, Dentry.class);
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+		return null;
+	}
 
-    @Override
-    public List<Dentry> query() throws ContentException {
-        return null;
-    }
+	@Override
+	public List<Dentry> query() throws ContentException {
+		return null;
+	}
 }

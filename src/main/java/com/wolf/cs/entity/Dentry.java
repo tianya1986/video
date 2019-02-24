@@ -3,7 +3,7 @@ package com.wolf.cs.entity;
 import java.io.Serializable;
 
 /**
- * <p>Title: 视频对象        </p>
+ * <p>Title: 目录对象        </p>
  * <p>Description:  </p>
  * <p>Copyright: Copyright (c) 2019     </p>
  * <p>Company: ND Co., Ltd.       </p>

@@ -1,26 +1,39 @@
 (function a() {
+	$("#selectFile").click(function() {
+		$("#uploadFile").click();
+	});
 	var fileBtn = $("input[name=file]");
 	var processBar = $("#progressBar");
-	var uploadBtn = $("input[name=upload]");
+	var uploadBtn = $("#uploadSubmit");
 	var canelBtn = $("input[name=cancelUpload]");
+	
 	var ot;// 上传开始时间
 	var oloaded;// 已上传文件大小
 	fileBtn.change(function() {
 		var fileObj = fileBtn.get(0).files[0]; // js获取文件对象
 		if (fileObj) {
 			var fileSize = getSize(fileObj.size);
-			$("label[name=upfileName]").text('文件名：' + fileObj.name);
-			$("label[name=upfileSize]").text('文件大小：' + fileSize);
-			$("label[name=upfileType]").text('文件类型：' + fileObj.type);
+			$("#fileName").val(fileObj.name);
+			$("#fileSize").val(fileSize);
+			$("#fileType").val(fileObj.type);
 			uploadBtn.attr('disabled', false);
 		}
 	});
 	// 上传文件按钮点击的时候
 	uploadBtn.click(function() {
-		// 进度条归零
-		setProgress(0);
 		// 上传按钮禁用
 		$(this).attr('disabled', true);
+		var fileObj = fileBtn.get(0).files[0];
+		if (fileObj == null) {
+			alert("请选择文件");
+			// 上传按钮禁用
+			$(this).attr('disabled', false);
+			return;
+		}
+		
+		// 进度条归零
+		setProgress(0);
+		
 		// 进度条显示
 		showProgress();
 		// 上传文件
@@ -29,10 +42,6 @@
 	function uploadFile() {
 		var url = "/video/upload";
 		var fileObj = fileBtn.get(0).files[0];
-		if (fileObj == null) {
-			alert("请选择文件");
-			return;
-		}
 		// FormData 对象
 		var form = new FormData();
 		form.append('file', fileObj); // 文件对象

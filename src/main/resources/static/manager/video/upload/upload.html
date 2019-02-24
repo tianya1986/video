@@ -18,10 +18,6 @@
 	class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" href="/manager/assets/css/ace-skins.min.css" />
 <link rel="stylesheet" href="/manager/assets/css/ace-rtl.min.css" />
-
-<!-- page specific plugin styles -->
-<link rel="stylesheet" href="/manager/assets/css/dropzone.min.css" />
-
 </head>
 <body class="no-skin">
 	<include src="../layout/navbar.html"></include>
@@ -42,31 +38,82 @@
 				</div>
 
 				<div class="page-content">
-					<span id="time"></span>
-					<div class="row">
-						<input class="btn btn-info btn-xs" type="file" name="file" /><br />
-						<div class="col-lg-5"
-							style="padding-left: 0; padding-right: 0; margin-bottom: 0px;">
-							<div class="progress progress-striped active" style="display:">
-								<div id="progressBar" class="progress-bar progress-bar-success"
-									role="progressbar" aria-valuemin="0" aria-valuenow="0"
-									aria-valuemax="100" style="width: 20%"></div>
-							</div>
-						</div>
-						<!-- 显示上传速度 -->
-						<div id="showInfo" class="col-lg-2">0KB/s</div>
-					</div>
 					<!-- 显示文件信息 -->
 					<div id="showFieInfo" class="row">
-						<label name="upfileName"></label><br /> <label name="upfileSize"></label><br />
 						<label name="upfileType"></label><br />
 					</div>
-					<div class="row">
-						<input class="btn btn-success btn-xs" type="button" name="upload"
-							value="上传" /> <input class="btn btn-success btn-xs"
-							type="button" name="cancelUpload" value="取消" />
-					</div>
+					<div class="row"></div>
 
+					<div class="row">
+						<div class="col-xs-12">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">
+									</label>
+									<div class="col-sm-9">
+										<input type="file" id="uploadFile" name="file"
+											style="display: none;">
+										<button type="button" class="btn btn-sm btn-success"
+											id="selectFile">选择文件</button>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> 视频名称 </label>
+
+									<div class="col-sm-9">
+										<input type="text" id="fileName" class="col-xs-10 col-sm-5"
+											name="upfileName" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> 视频大小 </label>
+
+									<div class="col-sm-9">
+										<input type="text" id="fileSize" class="col-xs-10 col-sm-5"
+											name="fileSize" readonly />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> 文件类型 </label>
+
+									<div class="col-sm-9">
+										<input type="text" id="fileType" class="col-xs-10 col-sm-5"
+											name="fileType" readonly />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> </label>
+
+									<div class="col-sm-9">
+										<button class="btn btn-info" type="button" id="uploadSubmit">
+											<i class="ace-icon fa fa-check bigger-110"></i> 上传
+										</button>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">
+										上传进度 </label>
+									<div class="col-lg-3 col-sm-9">
+										<div class="progress progress-striped active" style="display:none">
+											<div id="progressBar"
+												class="progress-bar progress-bar-success" role="progressbar"
+												aria-valuemin="0" aria-valuenow="0" aria-valuemax="100"
+												style="width: 1%"></div>
+										</div>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
 					<!-- /.page-content -->
 				</div>
 			</div>

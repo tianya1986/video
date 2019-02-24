@@ -30,7 +30,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Result<Video> query(int offset, int limit, int status) throws VideoException {
+    public Result<Video> query(int offset, int limit, String status) throws VideoException {
         return videoDao.query(offset, limit, status);
     }
 
@@ -41,9 +41,9 @@ public class VideoServiceImpl implements VideoService {
             video.setShortURL(shortURL);
             video.setPrice(price);
             video.setStatus(Status.ON_SALE);
-            videoDao.update(video);
+            video = videoDao.update(video);
         }
-        return null;
+        return video;
     }
 
     @Override
@@ -53,9 +53,9 @@ public class VideoServiceImpl implements VideoService {
             video.setShortURL(shortURL);
             video.setPrice(0f);
             video.setStatus(Status.ON_FREE);
-            videoDao.update(video);
+            video = videoDao.update(video);
         }
-        return null;
+        return video;
     }
 
     @Override
@@ -65,8 +65,8 @@ public class VideoServiceImpl implements VideoService {
             video.setShortURL("");
             video.setPrice(0f);
             video.setStatus(Status.OFF_SALE);
-            videoDao.update(video);
+            video = videoDao.update(video);
         }
-        return null;
+        return video;
     }
 }

@@ -28,7 +28,7 @@ public interface VideoService {
      * @return
      * @throws VideoException
      */
-    public Result<Video> query(int offset, int limit, int status) throws VideoException;
+    public Result<Video> query(int offset, int limit, String status) throws VideoException;
 
     /**
      * <p>Description:  加载视频详情            </p>

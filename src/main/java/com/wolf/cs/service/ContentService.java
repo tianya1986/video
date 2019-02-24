@@ -19,7 +19,7 @@ public interface ContentService {
      * <p>Create author: wolf   </p>
      * @param dentry 文件信息
      */
-    public void save(Dentry dentry) throws ContentException;
+    public Dentry save(Dentry dentry) throws ContentException;
 
     /**
      * <p>Description:   获取文件信息       </p>
