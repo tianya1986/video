@@ -1,4 +1,8 @@
 (function a() {
+    function init(){
+
+    }
+
 	$.get("/video/list",
 	function(data, status) {
 		var $tbody = $("#simple-table > tbody");
@@ -25,14 +29,42 @@
 			
 			if(video.status == "0"){
 				var $button = $("<button class='btn btn-xs btn-success'>上架</button>");
-				$button.click(video.videoId, function(event){
-					var $this = $(this);
-					$this.attr("disabled","disabled");
-					var videoId = event.data; 
-					$.post("/video/" + videoId + "/action/onsale",{price:5},function(video){
-					    $this.removeAttr("disabled")
-					    createItem(video, $this.parent().parent());
-					});
+				$button.click(video, function(event){
+                	var videoId = event.data.videoId;
+                	var button = $(this);
+                	$("#input_price").val(event.data.price);
+				$( "#dialog-confirm" ).removeClass('hide').dialog({
+                						resizable: false,
+                						width: '50%',
+                						modal: true,
+                						title: "视频上架",
+                						title_html: false,
+                						buttons: [
+                							{
+                								html: "上架",
+                								"class" : "btn btn-primary btn-minier",
+                								click: function() {
+                                                    var json_data={"price":0};
+                                                    json_data.price=$("#input_price").val();
+                                                     $.post("/video/" + videoId + "/action/onsale",json_data,function(video){
+                                                        button.removeAttr("disabled")
+					                                    button.attr("disabled","disabled");
+                                                     					    createItem(video, button.parent().parent());
+                                                     					});
+                									$( this ).dialog( "close" );
+                								}
+                							}
+                							,
+                							{
+                								html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
+                								"class" : "btn btn-minier",
+                								click: function() {
+                									$( this ).dialog( "close" );
+                								}
+                							}
+                						]
+                					});
+
 				});
 				var $td = $("<td>")
 				$td.append($button);

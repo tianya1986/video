@@ -18,6 +18,7 @@
 	class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" href="/manager/assets/css/ace-skins.min.css" />
 <link rel="stylesheet" href="/manager/assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="../../assets/css/jquery-ui.min.css" />
 <style>
 .table>tbody>tr>td {
 	vertical-align:middle;
@@ -40,11 +41,9 @@
 					<!-- /.breadcrumb -->
 				</div>
 
-				<div class="page-content">
 
 					<div class="page-header">
 						<div class="clearfix">
-
 							<div class="pull-right">
 								<a href="/manager/video/upload/upload.html"><button
 										type="button" class="btn btn-sm btn-success">上传</button></a>
@@ -52,7 +51,17 @@
 						</div>
 					</div>
 					<!-- /.page-header -->
+				<div class="page-content">
+					<div id="dialog-confirm" class="hide">
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="input_price"> 请输入视频价格： </label>
 
+							<div class="col-sm-9">
+								<input type="text" id="input_price" placeholder="price" class="col-xs-10 col-sm-5" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0+(?=\d)/,'')" onkeyup="this.value=this.value.replace(/\D/g,'').replace(/^0+(?=\d)/,'')" />
+							</div>
+
+						</div>
+					</div><!-- #dialog-confirm -->
 					<div class="row">
 						<div class="col-xs-12">
 							<table id="simple-table" class="table table-bordered table-hover">
@@ -79,6 +88,7 @@
 			</div>
 		</div>
 		<!-- /.main-content -->
+
 	</div>
 
 	<script src="/manager/assets/js/jquery-2.1.4.min.js"></script>
@@ -90,11 +100,11 @@
 							+ "<"+"/script>");
 	</script>
 	<script src="/manager/assets/js/bootstrap.min.js"></script>
-
+	<script src="../../assets/js/jquery-ui.min.js"></script>
 	<!-- ace scripts -->
 	<script src="/manager/assets/js/ace-elements.min.js"></script>
 	<script src="/manager/assets/js/ace.min.js"></script>
-
+	<script src="../../assets/js/ace-extra.min.js"></script>
 	<script src="/manager/video/video-list/video-list.js"></script>
 
 
