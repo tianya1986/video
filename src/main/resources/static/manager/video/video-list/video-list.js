@@ -32,6 +32,8 @@
 
 			var shortURL = video.shortURL == null ? "" : video.shortURL;
 			$tr.append("<td><a href='" + shortURL + "' target='_blank'>" + shortURL + "</a></td>"); // 短地址
+			var domain = video.domain == null ? "" : video.domain;
+			$tr.append("<td>" + domain + "</td>"); // 域名
 			$tr.append("<td>" + dataFormat(video.createTime) + "</td>"); // 更新时间
 
 			if (video.status == "0") {

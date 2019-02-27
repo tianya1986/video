@@ -112,7 +112,6 @@ public class VideoController {
 				ShortURL shortURL = shortURLService.getShortURL(videoUrl);
 				System.out.println("===============shortURL "
 						+ shortURL.getData());
-				video.setPrice(price);
 				if (price == 0) {
 					video.setStatus(Status.ON_FREE); // 免费
 					video = videoService
@@ -120,7 +119,7 @@ public class VideoController {
 				} else {
 					video.setStatus(Status.ON_SALE); // 收费
 					video = videoService.onSale(videoId, shortURL.getData(),
-							price);
+							price, hostAddress);
 				}
 			}
 		} catch (VideoException e) {
@@ -200,6 +199,7 @@ public class VideoController {
 			video.setVideoId(UUID.randomUUID().toString().replaceAll("-", ""));
 			video.setName(fileName);
 			video.setPrice(0f);
+			video.setDomain("");
 			video.setStatus(Status.OFF_SALE); // 默认：下架
 			video.setCreateTime(System.currentTimeMillis()); // 创建时间
 			videoService.save(video);

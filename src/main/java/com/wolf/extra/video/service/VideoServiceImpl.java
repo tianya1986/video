@@ -34,11 +34,12 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video onSale(String videoId, String shortURL, float price) throws VideoException {
+    public Video onSale(String videoId, String shortURL, float price, String domain) throws VideoException {
         Video video = load(videoId);
         if (video != null) {
             video.setShortURL(shortURL);
             video.setPrice(price);
+            video.setDomain(domain);
             video.setStatus(Status.ON_SALE);
             video = videoDao.update(video);
         }

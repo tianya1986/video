@@ -49,7 +49,7 @@ public interface VideoService {
      * @return
      * @throws VideoException
      */
-    public Video onSale(String videoId, String shortURL, float price) throws VideoException;
+    public Video onSale(String videoId, String shortURL, float price, String domain) throws VideoException;
 
     /**
      * <p>Description: 下架视频             </p>

@@ -36,6 +36,11 @@ public class Video {
 	 * 短地址
 	 */
 	private String shortURL;
+	
+	/**
+	 * 对应域名
+	 */
+	private String domain;
 
 	/**
 	 * 点击量
@@ -99,6 +104,14 @@ public class Video {
 
 	public void setShortURL(String shortURL) {
 		this.shortURL = shortURL;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
 	public long getClickNumber() {
