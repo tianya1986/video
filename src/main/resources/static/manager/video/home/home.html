@@ -6,16 +6,12 @@
 <title>视频管理后台</title>
 
 <meta name="description" content="overview &amp; stats" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 <link rel="stylesheet" href="/manager/assets/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="/manager/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
-<link rel="stylesheet"
-	href="/manager/assets/css/fonts.googleapis.com.css" />
-<link rel="stylesheet" href="/manager/assets/css/ace.min.css"
-	class="ace-main-stylesheet" id="main-ace-style" />
+<link rel="stylesheet" href="/manager/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/manager/assets/css/fonts.googleapis.com.css" />
+<link rel="stylesheet" href="/manager/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 <link rel="stylesheet" href="/manager/assets/css/ace-skins.min.css" />
 <link rel="stylesheet" href="/manager/assets/css/ace-rtl.min.css" />
 
@@ -23,31 +19,30 @@
 <body class="no-skin">
 	<include src="../layout/navbar.html"></include>
 	<div class="main-container ace-save-state" id="main-container">
+		<script>
+			window.navIndex = 0;
+		</script>
 		<include src="../layout/sidebar.html"></include>
-
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
-						</li>
-						<li class="active">Dashboard</li>
+						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">首页</a></li>
 					</ul>
 					<!-- /.breadcrumb -->
 
-					<div class="nav-search" id="nav-search">
-						<form class="form-search">
-							<span class="input-icon"> <input type="text"
-								placeholder="Search ..." class="nav-search-input"
-								id="nav-search-input" autocomplete="off" /> <i
-								class="ace-icon fa fa-search nav-search-icon"></i>
-							</span>
-						</form>
-					</div>
 					<!-- /.nav-search -->
 				</div>
 
-				<div class="page-content"></div>
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-3"></div>
+						<div class="col-xs-6">
+							<img src="../resources/image/money-make-me-happy.jpg" class="img-responsive" alt="Cinque Terre">
+						</div>
+						<div class="col-xs-3"></div>
+					</div>
+				</div>
 				<!-- /.page-content -->
 			</div>
 		</div>
@@ -57,10 +52,7 @@
 	<script src="/manager/assets/js/jquery-2.1.4.min.js"></script>
 	<script src="/manager/assets/js/include.js"></script>
 	<script type="text/javascript">
-		if ('ontouchstart' in document.documentElement)
-			document
-					.write("<script src='/manager/assets/js/jquery.mobile.custom.min.js'>"
-							+ "<"+"/script>");
+		if ('ontouchstart' in document.documentElement) document.write("<script src='/manager/assets/js/jquery.mobile.custom.min.js'>" + "<"+"/script>");
 	</script>
 	<script src="/manager/assets/js/bootstrap.min.js"></script>
 
@@ -75,6 +67,37 @@
 	<!-- ace scripts -->
 	<script src="/manager/assets/js/ace-elements.min.js"></script>
 	<script src="/manager/assets/js/ace.min.js"></script>
+
+	<script src="../../assets/js/bootstrap-paginator.js"></script>
+
+	<script>
+		createPaginator();
+		function createPaginator (result) {
+			// 分页标签
+			$('#pageLimit').bootstrapPaginator({
+				currentPage : 1,// 当前的请求页面。
+				totalPages : 20,// 一共多少页。
+				size : "normal",// 应该是页眉的大小。
+				bootstrapMajorVersion : 3,// bootstrap的版本要求。
+				alignment : "right",
+				numberOfPages : 5,// 一页列出多少数据。
+				itemTexts : function (type , page , current) {// 如下的代码是将页眉显示的中文显示我们自定义的中文。
+					switch (type) {
+						case "first":
+							return "首页";
+						case "prev":
+							return "上一页";
+						case "next":
+							return "下一页";
+						case "last":
+							return "末页";
+						case "page":
+							return page;
+					}
+				}
+			});
+		}
+	</script>
 
 </body>
 </html>

@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import paging.Result;
-
 import com.wolf.common.utils.FileUtil;
 import com.wolf.cs.CSConfig;
 import com.wolf.cs.ContentException;
@@ -28,9 +26,12 @@ import com.wolf.cs.service.ContentService;
 import com.wolf.extra.video.Status;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
+import com.wolf.extra.video.database.entity.VideoDomain;
 import com.wolf.extra.video.entity.ShortURL;
 import com.wolf.extra.video.service.ShortURLService;
+import com.wolf.extra.video.service.VideoDomainService;
 import com.wolf.extra.video.service.VideoService;
+import com.wolf.paging.Result;
 
 /**
  * 视频
@@ -48,9 +49,17 @@ public class VideoController {
 	@Autowired
 	private ShortURLService shortURLService; // 短地址服务
 
+	@Autowired
+	private VideoDomainService domainService; // 域名服务
+
 	@Value("${content.service.path.video}")
 	private String mVideoPath; // 视频地址
 
+	/**
+	 * 获取视频详情
+	 * @param videoId
+	 * @return
+	 */
 	@RequestMapping(value = "/{videoId}")
 	public Video getVideo(@PathVariable("videoId") String videoId) {
 		Video video = null;
@@ -74,11 +83,14 @@ public class VideoController {
 	@RequestMapping(value = "/{videoId}/action/onsale", method = RequestMethod.POST)
 	public Video onSale(HttpServletRequest request,
 			@PathVariable("videoId") String videoId,
-			@RequestParam(value = "price", required = true) float price) {
+			@RequestParam(value = "price", required = true) float price,
+			@RequestParam(value = "domainId", required = true) String domainId) {
+
 		Video video = null;
 		try {
 			video = videoService.load(videoId);
 			if (video != null) {
+				VideoDomain domain = domainService.load(domainId);
 				InetAddress address = null;
 				try {
 					address = InetAddress.getLocalHost();
@@ -87,8 +99,11 @@ public class VideoController {
 				}
 
 				String hostAddress = address.getHostAddress();
-				String videoUrl = "http://" + hostAddress + ":"
-						+ request.getServerPort()
+				if (domain != null) {
+					hostAddress = domain.getDomain();
+				}
+
+				String videoUrl = "http://" + hostAddress
 						+ "/manager/video/play/play.html?videoId="
 						+ video.getVideoId();
 				System.out.println("===============hostAddress " + hostAddress);
@@ -146,11 +161,6 @@ public class VideoController {
 			e.printStackTrace();
 		}
 		return result;
-	}
-
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public ModelAndView goUpdate() {
-		return new ModelAndView("video/upload");
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)

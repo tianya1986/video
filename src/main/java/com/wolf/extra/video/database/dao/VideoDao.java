@@ -1,9 +1,8 @@
 package com.wolf.extra.video.database.dao;
 
-import paging.Result;
-
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
+import com.wolf.paging.Result;
 
 public interface VideoDao {
 

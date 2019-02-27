@@ -12,13 +12,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
-import paging.PagingUtil;
-import paging.Result;
-
 import com.mongodb.client.result.UpdateResult;
 import com.wolf.common.utils.StringUtil;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
+import com.wolf.paging.PagingUtil;
+import com.wolf.paging.Result;
 
 @Component
 public class VideoDaoImpl implements VideoDao {

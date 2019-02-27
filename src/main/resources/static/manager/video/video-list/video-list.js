@@ -1,23 +1,29 @@
-(function a() {
-	function init() {
+(function a () {
+	$.get("/domain/list", function (data , status) {
+		var $select = $("#domainSelect");
+		if (data != null) {
+			for (var i = 0, len = data.length; i < len; i++) {
+				var $option = $("<option>").val(data[i].domainId).text(data[i].domain);
+				$select.append($option);
+			}
+		}
+	});
 
-	}
-
-	$.get("/video/list", function(data, status) {
+	$.get("/video/list", function (data , status) {
 		var $tbody = $("#simple-table > tbody");
 		var items = data.items;
 		var html = "";
-		if (data != null) {
+		if (items != null) {
 			for (var i = 0, len = items.length; i < len; i++) {
 				var $tr = $("<tr>");
 				createItem(items[i], $tr);
 				$tbody.append($tr);
 			}
 		}
-		
+
 		createPaginator(data);
 
-		function createItem(video, $tr) {
+		function createItem (video , $tr) {
 			$tr.empty();
 			$tr.append("<td><a href='/manager/video/play/play.html?videoId=" + video.videoId + "' target='_blank'>" + video.name + "</a></td>"); // 名称
 			$tr.append("<td class='center'>" + video.price + "元</td>"); // 价格
@@ -30,10 +36,9 @@
 
 			if (video.status == "0") {
 				var $button = $("<button class='btn btn-xs btn-success'>上架</button>");
-				$button.click(video, function(event) {
+				$button.click(video, function (event) {
 					var videoId = event.data.videoId;
 					var button = $(this);
-					$("#input_price").val(event.data.price);
 					$("#dialog-confirm").removeClass('hide').dialog({
 						resizable : false,
 						width : '30%',
@@ -43,12 +48,13 @@
 						buttons : [ {
 							html : "上架",
 							"class" : "btn btn-primary btn-minier",
-							click : function() {
+							click : function () {
 								var json_data = {
 									"price" : 0
 								};
 								json_data.price = $("#input_price").val();
-								$.post("/video/" + videoId + "/action/onsale", json_data, function(video) {
+								json_data.domainId = $("#domainSelect").val();
+								$.post("/video/" + videoId + "/action/onsale", json_data, function (video) {
 									button.removeAttr("disabled")
 									button.attr("disabled", "disabled");
 									createItem(video, button.parent().parent());
@@ -58,7 +64,7 @@
 						}, {
 							html : "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
 							"class" : "btn btn-minier",
-							click : function() {
+							click : function () {
 								$(this).dialog("close");
 							}
 						} ]
@@ -70,11 +76,11 @@
 				$tr.append($td);
 			} else if (video.status == "1" || video.status == "2") {
 				var $button = $("<button class='btn btn-xs btn-danger'>下架</button>");
-				$button.click(video.videoId, function(event) {
+				$button.click(video.videoId, function (event) {
 					var $this = $(this);
 					$this.attr("disabled", "disabled");
 					var videoId = event.data;
-					$.post("/video/" + videoId + "/action/offsale", {}, function(video) {
+					$.post("/video/" + videoId + "/action/offsale", {}, function (video) {
 						$this.removeAttr("disabled")
 						createItem(video, $this.parent().parent());
 					});
@@ -87,24 +93,21 @@
 		}
 	});
 
-	function dataFormat(time) {
+	function dataFormat (time) {
 		var date = new Date(time);
-		var dateString = (date.getFullYear()) + "-" + (date.getMonth() + 1) + "-" + (date.getDate()) + " " + (date.getHours()) + ":" + (date.getMinutes()) + ":"
-				+ (date.getSeconds());
+		var dateString = (date.getFullYear()) + "-" + (date.getMonth() + 1) + "-" + (date.getDate()) + " " + (date.getHours()) + ":" + (date.getMinutes()) + ":" + (date.getSeconds());
 		return dateString;
 	}
 
-	function getStatusName(status) {
+	function getStatusName (status) {
 		if (status == "0") {
 			return "未上架";
 		} else if (status == "1") {
 			return "付费";
-		} else if (status == "2") {
-			return "免费";
-		}
+		} else if (status == "2") { return "免费"; }
 	}
 
-	function createPaginator(result) {
+	function createPaginator (result) {
 		// 分页标签
 		$('#pageLimit').bootstrapPaginator({
 			currentPage : 1,// 当前的请求页面。
@@ -113,18 +116,18 @@
 			bootstrapMajorVersion : 3,// bootstrap的版本要求。
 			alignment : "right",
 			numberOfPages : 5,// 一页列出多少数据。
-			itemTexts : function(type, page, current) {// 如下的代码是将页眉显示的中文显示我们自定义的中文。
+			itemTexts : function (type , page , current) {// 如下的代码是将页眉显示的中文显示我们自定义的中文。
 				switch (type) {
-				case "first":
-					return "首页";
-				case "prev":
-					return "上一页";
-				case "next":
-					return "下一页";
-				case "last":
-					return "末页";
-				case "page":
-					return page;
+					case "first":
+						return "首页";
+					case "prev":
+						return "上一页";
+					case "next":
+						return "下一页";
+					case "last":
+						return "末页";
+					case "page":
+						return page;
 				}
 			}
 		});

@@ -3,12 +3,11 @@ package com.wolf.extra.video.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import paging.Result;
-
 import com.wolf.extra.video.Status;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.dao.VideoDao;
 import com.wolf.extra.video.database.entity.Video;
+import com.wolf.paging.Result;
 
 /**
  * 视频服务类

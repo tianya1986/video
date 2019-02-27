@@ -1,4 +1,4 @@
-package paging;
+package com.wolf.paging;
 
 public final class PagingUtil {
 

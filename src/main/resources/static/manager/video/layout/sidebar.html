@@ -19,6 +19,7 @@
 
 			$("div#sidebar ul li").each(function (index) {
 				var $li = $(this);
+				console.log("nav index: " + navIndex);
 				if (navIndex == index) {
 					$li.attr("class", "active");
 				} else {
@@ -53,13 +54,13 @@
 		<!-- /.sidebar-shortcuts -->
 
 		<ul class="nav nav-list">
-			<li class="active"><a href="index.html"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 仪表板 </span>
+			<li class="active"><a href="../home/home.html"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 首页 </span>
 			</a> <b class="arrow"></b></li>
 
-			<li class=""><a href="/manager/video/video-list/video-list.html"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 视频库 </span>
+			<li class=""><a href="../video-list/video-list.html"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 视频库 </span>
 			</a> <b class="arrow"></b></li>
 
-			<li class=""><a href="#"> <i class="menu-icon fa fa-tag"></i> <span class="menu-text"> 域名管理 </span>
+			<li class=""><a href="../domain/domain-list.html"> <i class="menu-icon fa fa-tag"></i> <span class="menu-text"> 域名管理 </span>
 			</a> <b class="arrow"></b></li>
 		</ul>
 		<!-- /.nav-list -->

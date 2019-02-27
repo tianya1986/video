@@ -1,9 +1,8 @@
 package com.wolf.extra.video.service;
 
-import paging.Result;
-
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
+import com.wolf.paging.Result;
 
 /**
  * 视频服务类
