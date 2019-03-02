@@ -52,6 +52,8 @@ public class Video {
 	 * {@link com.wolf.extra.video.Status}}
 	 */
 	private String status;
+	
+	private boolean isNew;
 
 	/**
 	 * 视频创建时间
