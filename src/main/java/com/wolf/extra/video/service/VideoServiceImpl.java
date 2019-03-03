@@ -47,7 +47,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video onSaleFree(String videoId, String shortURL) throws VideoException {
+    public Video onSaleFree(String videoId, String shortURL, String domain) throws VideoException {
         Video video = load(videoId);
         if (video != null) {
             video.setShortURL(shortURL);

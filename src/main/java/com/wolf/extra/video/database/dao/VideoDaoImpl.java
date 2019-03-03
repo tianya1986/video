@@ -76,6 +76,7 @@ public class VideoDaoImpl implements VideoDao {
 		update.set("price", video.getPrice()); // 价格
 		update.set("shortURL", video.getShortURL()); // 视频短地址
 		update.set("status", video.getStatus()); // 更新视频状态
+		update.set("domain", video.getDomain()); // 更新域名
 		UpdateResult result = mongoTemplate.updateFirst(query, update,
 				Video.class);
 		if (result.getModifiedCount() == 1) {

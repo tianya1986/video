@@ -41,7 +41,7 @@ public class Video {
 	 * 对应域名
 	 */
 	private String domain;
-
+	
 	/**
 	 * 点击量
 	 */

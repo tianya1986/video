@@ -36,7 +36,7 @@ public class Order {
 	/**
 	 * 价格
 	 */
-	private float price;
+	private String price;
 
 	/**
 	 * 订单完成状态
@@ -102,11 +102,11 @@ public class Order {
 		this.payType = payType;
 	}
 
-	public float getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 

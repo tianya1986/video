@@ -115,7 +115,7 @@ public class VideoController {
 				if (price == 0) {
 					video.setStatus(Status.ON_FREE); // 免费
 					video = videoService
-							.onSaleFree(videoId, shortURL.getData());
+							.onSaleFree(videoId, shortURL.getData(), hostAddress);
 				} else {
 					video.setStatus(Status.ON_SALE); // 收费
 					video = videoService.onSale(videoId, shortURL.getData(),

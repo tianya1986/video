@@ -71,5 +71,5 @@ public interface VideoService {
      * @return
      * @throws VideoException
      */
-    public Video onSaleFree(String videoId, String shortURL) throws VideoException;
+    public Video onSaleFree(String videoId, String shortURL, String domain) throws VideoException;
 }
