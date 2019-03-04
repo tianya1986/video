@@ -10,6 +10,11 @@ import com.wolf.extra.video.database.entity.Order;
  */
 public interface OrderService {
 
+	public Order load(String orderId) throws VideoException;
+
+	public Order create(String videoId, String orderNumber)
+			throws VideoException;
+
 	/**
 	 * 保存订单
 	 * @param orderNumber 订单号
@@ -20,7 +25,7 @@ public interface OrderService {
 	 * @return
 	 * @throws VideoException
 	 */
-	public Order save(String orderNumber, String key, String pay, String price,
-			String appid) throws VideoException;
+	public Order update(String orderId, String orderNumber, String key,
+			String pay, String price, String appid) throws VideoException;
 
 }

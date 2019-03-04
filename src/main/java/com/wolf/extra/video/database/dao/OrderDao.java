@@ -4,6 +4,16 @@ import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Order;
 
 public interface OrderDao {
+	
+	public Order load(String orderId) throws VideoException;
+	
+	/**
+	 * 创建订单
+	 * @param orderNumber
+	 * @return
+	 * @throws VideoException
+	 */
+	public Order create(String videoId, String orderNumber) throws VideoException;
 
 	/**
 	 * 保存订单
@@ -15,6 +25,6 @@ public interface OrderDao {
 	 * @return
 	 * @throws VideoException
 	 */
-	public Order save(String orderNumber, String key, String pay, String price,
+	public Order update(String orderId, String orderNumber, String key, String pay, String price,
 			String appid) throws VideoException;
 }

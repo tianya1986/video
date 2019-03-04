@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.wolf.common.utils.FileUtil;
 import com.wolf.cs.CSConfig;
@@ -54,7 +53,7 @@ public class VideoController {
 
 	@Value("${content.service.path.video}")
 	private String mVideoPath; // 视频地址
-
+	
 	/**
 	 * 获取视频详情
 	 * @param videoId
@@ -104,7 +103,7 @@ public class VideoController {
 				}
 
 				String videoUrl = "http://" + hostAddress
-						+ "/manager/video/play/play.html?videoId="
+						+ "/manager/video/order/order.html?videoId="
 						+ video.getVideoId();
 				System.out.println("===============hostAddress " + hostAddress);
 				System.out.println("===============videoUrl " + videoUrl);
