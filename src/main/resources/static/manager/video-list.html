@@ -8,13 +8,13 @@
 <meta name="description" content="overview &amp; stats" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-<link rel="stylesheet" href="/manager/assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/manager/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/manager/assets/css/fonts.googleapis.com.css" />
-<link rel="stylesheet" href="/manager/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-<link rel="stylesheet" href="/manager/assets/css/ace-skins.min.css" />
-<link rel="stylesheet" href="/manager/assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="../../assets/css/jquery-ui.min.css" />
+<link rel="stylesheet" href="../resources/css/bootstrap/3.3.6/bootstrap.min.css" />
+<link rel="stylesheet" href="../resources/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="../resources/css/fonts.googleapis.com.css" />
+<link rel="stylesheet" href="./resources/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+<link rel="stylesheet" href="./resources/css/ace-skins.min.css" />
+<link rel="stylesheet" href="./resources/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="../resources/css/jqueryui/jquery-ui.min.css" />
 <style>
 .table>tbody>tr>td {
 	vertical-align: middle;
@@ -27,19 +27,19 @@
 </style>
 </head>
 <body class="no-skin">
-	<include src="../layout/navbar.html"></include>
+	<include src="./layout/navbar.html"></include>
 	<div class="main-container ace-save-state" id="main-container">
 		<script>
 			window.navIndex = 1;
 		</script>
-		<include src="../layout/sidebar.html"></include>
+		<include src="./layout/sidebar.html"></include>
 
 		<div class="main-content">
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">首页</a></li>
-						<li class="active"><a href="#">视频库</a></li>
+						<li><i class="ace-icon fa fa-home home-icon"></i> <a href="./home.html">首页</a></li>
+						<li class="active">视频库</li>
 					</ul>
 					<!-- /.breadcrumb -->
 				</div>
@@ -50,7 +50,7 @@
 					<div class="page-header">
 						<div class="clearfix">
 							<div class="pull-right">
-								<a href="/manager/video/upload/upload.html"><button type="button" class="btn btn-sm btn-success">上传</button></a>
+								<a href="./upload.html"><button type="button" class="btn btn-sm btn-success">上传</button></a>
 							</div>
 						</div>
 					</div>
@@ -115,20 +115,19 @@
 
 	</div>
 
-	<script src="/manager/assets/js/jquery-2.1.4.min.js"></script>
-	<script src="/manager/assets/js/include.js"></script>
+	<script src="../resources/js/jquery/2.1.4/jquery.min.js"></script>
+	<script src="./resources/js/include.js"></script>
 	<script type="text/javascript">
 		if ('ontouchstart' in document.documentElement) document.write("<script src='/manager/assets/js/jquery.mobile.custom.min.js'>" + "<"+"/script>");
 	</script>
-	<script src="/manager/assets/js/bootstrap.min.js"></script>
-	<script src="../../assets/js/jquery-ui.min.js"></script>
-	<script src="../../assets/js/bootstrap-paginator.js"></script>
+	<script src="../resources/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+	<script src="../resources/js/jquery-ui/1.11.4/jquery-ui.min.js"></script>
+	<script src="../resources/js/bootstrap-paginator/0.5/bootstrap-paginator.js"></script>
 	<!-- ace scripts -->
-	<script src="/manager/assets/js/ace-elements.min.js"></script>
-	<script src="/manager/assets/js/ace.min.js"></script>
-	<script src="../../assets/js/ace-extra.min.js"></script>
-	<script src="/manager/video/video-list/video-list.js"></script>
-	<script src="./paging.js"></script>
+	<script src="./resources/js/ace-elements.min.js"></script>
+	<script src="./resources/js/ace.min.js"></script>
+	<script src="./resources/js/ace-extra.min.js"></script>
+	<script src="./resources/js/video-list.js"></script>
 
 
 </body>

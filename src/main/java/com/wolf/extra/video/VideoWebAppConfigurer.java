@@ -43,8 +43,8 @@ public class VideoWebAppConfigurer implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**")
-				.addResourceLocations("classpath:/static/");
+//		registry.addResourceHandler("/resources/**")
+//				.addResourceLocations("classpath:/static/");
 //		registry.addResourceHandler("/manager/**").addResourceLocations(
 //				"classpath:/static/manager/");
 

@@ -53,7 +53,7 @@ public class VideoController {
 
 	@Value("${content.service.path.video}")
 	private String mVideoPath; // 视频地址
-	
+
 	/**
 	 * 获取视频详情
 	 * @param videoId
@@ -64,8 +64,10 @@ public class VideoController {
 		Video video = null;
 		try {
 			video = videoService.load(videoId);
-			Dentry dentry = contentService.load(video.getDentryId());
-			video.setDentry(dentry);
+			if (video != null) {
+				Dentry dentry = contentService.load(video.getDentryId());
+				video.setDentry(dentry);
+			}
 		} catch (VideoException e) {
 			e.printStackTrace();
 		} catch (ContentException e) {
@@ -103,7 +105,7 @@ public class VideoController {
 				}
 
 				String videoUrl = "http://" + hostAddress
-						+ "/manager/video/order/order.html?videoId="
+						+ "/manager/order.html?videoId="
 						+ video.getVideoId();
 				System.out.println("===============hostAddress " + hostAddress);
 				System.out.println("===============videoUrl " + videoUrl);
@@ -113,8 +115,8 @@ public class VideoController {
 						+ shortURL.getData());
 				if (price == 0) {
 					video.setStatus(Status.ON_FREE); // 免费
-					video = videoService
-							.onSaleFree(videoId, shortURL.getData(), hostAddress);
+					video = videoService.onSaleFree(videoId,
+							shortURL.getData(), hostAddress);
 				} else {
 					video.setStatus(Status.ON_SALE); // 收费
 					video = videoService.onSale(videoId, shortURL.getData(),
