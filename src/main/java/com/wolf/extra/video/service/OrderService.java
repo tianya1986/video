@@ -12,7 +12,7 @@ public interface OrderService {
 
 	public Order load(String orderId) throws VideoException;
 
-	public Order create(String videoId, String orderNumber)
+	public Order create(String videoId, String orderNumber, String ipAddress, int status)
 			throws VideoException;
 
 	/**
@@ -25,7 +25,7 @@ public interface OrderService {
 	 * @return
 	 * @throws VideoException
 	 */
-	public Order update(String orderId, String orderNumber, String key,
+	public Order complete(String orderId, String orderNumber, String key,
 			String pay, String price, String appid) throws VideoException;
 
 }

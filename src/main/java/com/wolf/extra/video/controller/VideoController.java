@@ -8,6 +8,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +41,8 @@ import com.wolf.paging.Result;
 @RequestMapping("/video")
 public class VideoController {
 
+	private Logger logger = LoggerFactory.getLogger(VideoController.class);
+
 	@Autowired
 	private ContentService contentService; // cs服务
 
@@ -61,6 +65,7 @@ public class VideoController {
 	 */
 	@RequestMapping(value = "/{videoId}")
 	public Video getVideo(@PathVariable("videoId") String videoId) {
+		logger.info("Get video start, video id = " + videoId);
 		Video video = null;
 		try {
 			video = videoService.load(videoId);
@@ -70,8 +75,10 @@ public class VideoController {
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
+			logger.error("Get video error, " + e);
 		} catch (ContentException e) {
 			e.printStackTrace();
+			logger.error("Get video error, " + e);
 		}
 		return video;
 	}
@@ -86,7 +93,11 @@ public class VideoController {
 			@PathVariable("videoId") String videoId,
 			@RequestParam(value = "price", required = true) float price,
 			@RequestParam(value = "domainId", required = true) String domainId) {
-
+		logger.debug("Update order start. ");
+		logger.debug("videoId = " + videoId);
+		logger.debug("price = " + price);
+		logger.debug("domainId = " + domainId);
+		
 		Video video = null;
 		try {
 			video = videoService.load(videoId);
@@ -103,16 +114,13 @@ public class VideoController {
 				if (domain != null) {
 					hostAddress = domain.getDomain();
 				}
+				logger.debug("hostAddress = " + hostAddress);
 
-				String videoUrl = "http://" + hostAddress
-						+ "/manager/order.html?videoId="
-						+ video.getVideoId();
-				System.out.println("===============hostAddress " + hostAddress);
-				System.out.println("===============videoUrl " + videoUrl);
-
+				String videoUrl = "http://" + hostAddress + "/manager/order.html?videoId=" + video.getVideoId();
 				ShortURL shortURL = shortURLService.getShortURL(videoUrl);
-				System.out.println("===============shortURL "
-						+ shortURL.getData());
+				
+				logger.debug("videoUrl = " + videoUrl);
+				logger.debug("shortURL = " + shortURL.getData());
 				if (price == 0) {
 					video.setStatus(Status.ON_FREE); // 免费
 					video = videoService.onSaleFree(videoId,
@@ -125,6 +133,7 @@ public class VideoController {
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
+			logger.error("Create order error, " + e);
 		}
 		return video;
 	}
@@ -154,6 +163,7 @@ public class VideoController {
 			@RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
 			@RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(name = "status", required = false) String status) {
+		logger.info("Query video list execute. ");
 		Result<Video> result = null;
 		try {
 			result = videoService.query(offset, limit, status);

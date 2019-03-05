@@ -4,12 +4,15 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wolf.common.utils.NetworkUtil;
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
 import com.wolf.cs.service.ContentService;
@@ -24,6 +27,8 @@ import com.wolf.extra.video.service.VideoService;
 @RequestMapping("/order")
 public class OrderController {
 
+	private Logger logger = LoggerFactory.getLogger(OrderController.class);
+
 	@Autowired
 	private OrderService orderService; // 订单服务
 
@@ -34,26 +39,26 @@ public class OrderController {
 	private ContentService contentService;
 
 	@RequestMapping(value = "/{orderId}")
-	public VideoOrderResp loadOrder(@PathVariable("orderId") String orderId) {
-		System.out
-				.println(" ========================================= loadOrder execute =========================================");
+	public VideoOrderResp getOrder(@PathVariable("orderId") String orderId) {
+		logger.info("Get order info start, order id = " + orderId);
 		VideoOrderResp result = new VideoOrderResp();
 		try {
 			Order order = orderService.load(orderId);
 			if (order != null) {
-				System.out.println(" ============= Order status "
+				logger.info("Get order info execute, Order.status = "
 						+ order.getStatus());
-				System.out.println(" ============= Order price "
+				logger.info("Get order info execute, Order.price = "
 						+ order.getPrice());
-				System.out.println(" ============= Order orderNumberPayment "
+				logger.info("Get order info execute, Order.orderNumberPayment = "
 						+ order.getOrderNumberPayment());
-				System.out.println(" ============= Order payType "
+				logger.info("Get order info execute, Order.payType = "
 						+ order.getPayType());
-				System.out.println(" ============= Order orderNumber "
+				logger.info("Get order info execute, Order.orderNumber = "
 						+ order.getOrderNumber());
 				result.setOrder(order);
 				Video video = videoService.load(order.getVideoId());
-				if (video != null) {
+				if (video != null && order.getStatus() == 1) {
+					// 需要完成支付
 					Dentry denty = contentService.load(video.getDentryId());
 					video.setDentry(denty);
 				}
@@ -61,18 +66,20 @@ public class OrderController {
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
+			logger.error("Create order error, " + e);
 		} catch (ContentException e) {
 			e.printStackTrace();
+			logger.error("Create order error, " + e);
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/create/{videoId}")
-	public VideoOrderResp generateOrder(@PathVariable("videoId") String videoId) {
-		System.out
-				.println("========================================= Order create =========================================");
-		System.out.println("========================================= videoId "
-				+ videoId);
+	public VideoOrderResp createOrder(HttpServletRequest request,
+			@PathVariable("videoId") String videoId) {
+		logger.info("Create order start, video = " + videoId);
+		String ipAddress = NetworkUtil.getIpAddress(request);
+		logger.info("Ip address = " + ipAddress);
 		VideoOrderResp orderResp = new VideoOrderResp();
 		try {
 			Video video = videoService.load(videoId);
@@ -83,17 +90,23 @@ public class OrderController {
 				for (int i = 0; i < 3; i++) {
 					orderNumber += random.nextInt(10);
 				}
-				Order order = orderService.create(videoId, orderNumber);
+				int status = 0;
+				if (com.wolf.extra.video.Status.ON_FREE.equals(video.getStatus())) {
+					status = 1; // 免费的视频，直接完成订单
+				}
+				Order order = orderService.create(videoId, orderNumber,
+						ipAddress, status);
 				orderResp.setOrder(order);
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
+			logger.error("Create order error, " + e);
 		}
 		return orderResp;
 	}
 
 	/**
-	 * 订单接收
+	 * 完成订单
 	 * @param request
 	 * @param orderNumber  订单号
 	 * @param orderNumberPayment 订单平台订单
@@ -104,7 +117,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update")
-	public void order(
+	public void update(
 			HttpServletRequest request,
 			@RequestParam(value = "text1", required = false) String orderId,
 			@RequestParam(value = "ddh", required = false) String orderNumberPayment,
@@ -112,36 +125,19 @@ public class OrderController {
 			@RequestParam(value = "pay", required = false) String pay,
 			@RequestParam(value = "PayJe", required = false) String price,
 			@RequestParam(value = "appid", required = false) String appid) {
-		System.out
-				.println("========================================= Order save =========================================");
-		System.out
-				.println("========================================= orderId:         "
-						+ orderId);
-		System.out
-				.println("========================================= key:         "
-						+ key);
-		System.out
-				.println("========================================= orderNumberPayment: "
-						+ orderNumberPayment);
-		System.out
-				.println("========================================= pay:         "
-						+ pay);
-		System.out
-				.println("========================================= price:       "
-						+ price);
-		System.out
-				.println("========================================= appid:       "
-						+ appid);
-		if ("31093750".equals(key)) {
-
-		}
+		logger.info("Update order start. ");
+		logger.info("orderId = " + orderId);
+		logger.info("orderNumberPayment = " + orderNumberPayment);
+		logger.info("key = " + key);
+		logger.info("pay = " + pay);
+		logger.info("price = " + price);
+		logger.info("appid = " + appid);
 		try {
-			orderService.update(orderId, orderNumberPayment, key, pay, price,
+			orderService.complete(orderId, orderNumberPayment, key, pay, price,
 					appid);
 		} catch (VideoException e) {
-			System.out
-					.println("=========================================Order save error. ");
 			e.printStackTrace();
+			logger.error("Create order error, " + e);
 		}
 	}
 

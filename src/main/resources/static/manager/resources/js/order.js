@@ -6,10 +6,13 @@
 			return;
 		}
 		var price = data.video.price;
-		var tradeNumber = data.order.orderNumber;
-		var url = "http://" + data.host + "/ldpay/alipay.php?out_trade_no=" + tradeNumber + "&cny=" + price + "&pay=3&total_fee=" + price + "&orderId=" + data.order.orderId;
-		console.log("================url " + url)
-		 window.location.replace(url);
+		if(price > 0){
+			var tradeNumber = data.order.orderNumber;
+			var url = "http://" + data.host + "/ldpay/alipay.php?out_trade_no=" + tradeNumber + "&cny=" + price + "&pay=3&total_fee=" + price + "&orderId=" + data.order.orderId;
+			 window.location.replace(url);
+		} else {
+			window.location.replace("./play.html?orderId=" + data.order.orderId);
+		}
 	});
 
 	// 获取url中的参数

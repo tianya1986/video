@@ -19,9 +19,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public Order create(String videoId, String orderNumber)
+	public Order create(String videoId, String orderNumber, String ipAddress, int status)
 			throws VideoException {
-		return orderDao.create(videoId, orderNumber);
+		return orderDao.create(videoId, orderNumber, ipAddress, status);
 	}
 
 	/**
@@ -35,9 +35,9 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws VideoException
 	 */
 	@Override
-	public Order update(String orderId, String orderNumber, String key,
+	public Order complete(String orderId, String orderNumber, String key,
 			String pay, String price, String appid) throws VideoException {
-		return orderDao.update(orderId, orderNumber, key, pay, price, appid);
+		return orderDao.complete(orderId, orderNumber, key, pay, price, appid);
 	}
 
 }

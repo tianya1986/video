@@ -35,14 +35,15 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Order create(String videoId, String orderNumber)
+	public Order create(String videoId, String orderNumber, String ipAddress, int status)
 			throws VideoException {
 		Order order = new Order();
 		order.setOrderId(UUID.randomUUID().toString().replaceAll("-", ""));
 		order.setOrderNumber(orderNumber);
 		order.setCreateTime(System.currentTimeMillis());
 		order.setVideoId(videoId);
-		order.setStatus(0);
+		order.setUserIp(ipAddress);
+		order.setStatus(status);
 		return mongoTemplate.save(order);
 	}
 
@@ -57,7 +58,7 @@ public class OrderDaoImpl implements OrderDao {
 	 * @throws VideoException
 	 */
 	@Override
-	public Order update(String orderId, String orderNumber, String key,
+	public Order complete(String orderId, String orderNumber, String key,
 			String pay, String price, String appid) throws VideoException {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("orderId").is(orderId));
