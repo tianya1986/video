@@ -97,7 +97,7 @@ public class VideoController {
 		logger.debug("videoId = " + videoId);
 		logger.debug("price = " + price);
 		logger.debug("domainId = " + domainId);
-		
+
 		Video video = null;
 		try {
 			video = videoService.load(videoId);
@@ -116,19 +116,20 @@ public class VideoController {
 				}
 				logger.debug("hostAddress = " + hostAddress);
 
-				String videoUrl = "http://" + hostAddress + "/manager/order.html?videoId=" + video.getVideoId();
-				ShortURL shortURL = shortURLService.getShortURL(videoUrl);
-				
+				String videoUrl = "http://" + hostAddress
+						+ "/manager/order.html?videoId=" + video.getVideoId();
+				// ShortURL shortURL = shortURLService.getShortURL(videoUrl);
+				String shhortUrl = videoUrl;
+
 				logger.debug("videoUrl = " + videoUrl);
-				logger.debug("shortURL = " + shortURL.getData());
 				if (price == 0) {
 					video.setStatus(Status.ON_FREE); // 免费
-					video = videoService.onSaleFree(videoId,
-							shortURL.getData(), hostAddress);
+					video = videoService.onSaleFree(videoId, shhortUrl,
+							hostAddress);
 				} else {
 					video.setStatus(Status.ON_SALE); // 收费
-					video = videoService.onSale(videoId, shortURL.getData(),
-							price, hostAddress);
+					video = videoService.onSale(videoId, shhortUrl, price,
+							hostAddress);
 				}
 			}
 		} catch (VideoException e) {
@@ -163,7 +164,8 @@ public class VideoController {
 			@RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
 			@RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
 			@RequestParam(name = "status", required = false) String status) {
-		logger.info("Query video list execute. ");
+		logger.info("Query video list execute, offset = " + offset);
+		logger.info("Query video list execute, limit = " + limit);
 		Result<Video> result = null;
 		try {
 			result = videoService.query(offset, limit, status);

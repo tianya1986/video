@@ -28,6 +28,7 @@ import com.wolf.extra.video.service.VideoService;
 public class OrderController {
 
 	private Logger logger = LoggerFactory.getLogger(OrderController.class);
+	private final static String TAG = "OrderController";
 
 	@Autowired
 	private OrderService orderService; // 订单服务
@@ -40,20 +41,22 @@ public class OrderController {
 
 	@RequestMapping(value = "/{orderId}")
 	public VideoOrderResp getOrder(@PathVariable("orderId") String orderId) {
-		logger.info("Get order info start, order id = " + orderId);
+		logger.info(TAG + " Get order info execute, order id = " + orderId);
 		VideoOrderResp result = new VideoOrderResp();
 		try {
 			Order order = orderService.load(orderId);
 			if (order != null) {
-				logger.info("Get order info execute, Order.status = "
+				logger.info(TAG + " Get order info execute, Order.status = "
 						+ order.getStatus());
-				logger.info("Get order info execute, Order.price = "
+				logger.info(TAG + " Get order info execute, Order.price = "
 						+ order.getPrice());
-				logger.info("Get order info execute, Order.orderNumberPayment = "
+				logger.info(TAG
+						+ " Get order info execute, Order.orderNumberPayment = "
 						+ order.getOrderNumberPayment());
-				logger.info("Get order info execute, Order.payType = "
+				logger.info(TAG + " Get order info execute, Order.payType = "
 						+ order.getPayType());
-				logger.info("Get order info execute, Order.orderNumber = "
+				logger.info(TAG
+						+ " Get order info execute, Order.orderNumber = "
 						+ order.getOrderNumber());
 				result.setOrder(order);
 				Video video = videoService.load(order.getVideoId());
@@ -66,10 +69,10 @@ public class OrderController {
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
-			logger.error("Create order error, " + e);
+			logger.error(TAG + " Create order error, " + e);
 		} catch (ContentException e) {
 			e.printStackTrace();
-			logger.error("Create order error, " + e);
+			logger.error(TAG + " Create order error, " + e);
 		}
 		return result;
 	}
@@ -77,9 +80,9 @@ public class OrderController {
 	@RequestMapping(value = "/create/{videoId}")
 	public VideoOrderResp createOrder(HttpServletRequest request,
 			@PathVariable("videoId") String videoId) {
-		logger.info("Create order start, video = " + videoId);
+		logger.info(TAG + " Create order start, video = " + videoId);
 		String ipAddress = NetworkUtil.getIpAddress(request);
-		logger.info("Ip address = " + ipAddress);
+		logger.info(TAG + " Create order start, Ip address = " + ipAddress);
 		VideoOrderResp orderResp = new VideoOrderResp();
 		try {
 			Video video = videoService.load(videoId);
@@ -91,16 +94,27 @@ public class OrderController {
 					orderNumber += random.nextInt(10);
 				}
 				int status = 0;
-				if (com.wolf.extra.video.Status.ON_FREE.equals(video.getStatus())) {
+				if (com.wolf.extra.video.Status.ON_FREE.equals(video
+						.getStatus())) {
 					status = 1; // 免费的视频，直接完成订单
 				}
 				Order order = orderService.create(videoId, orderNumber,
 						ipAddress, status);
+				logger.info(TAG + " Create order start, Order.orderId = "
+						+ order.getOrderId());
+				logger.info(TAG + " Create order start, Order.orderNumber = "
+						+ order.getOrderNumber());
+				logger.info(TAG + " Create order start, Order.status = "
+						+ status);
+				logger.info(TAG + " Create order start, Video.price = "
+						+ video.getPrice());
+				logger.info(TAG + " Create order start, Video.status = "
+						+ video.getStatus());
 				orderResp.setOrder(order);
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
-			logger.error("Create order error, " + e);
+			logger.error(TAG + " Create order error, " + e);
 		}
 		return orderResp;
 	}
@@ -125,19 +139,19 @@ public class OrderController {
 			@RequestParam(value = "pay", required = false) String pay,
 			@RequestParam(value = "PayJe", required = false) String price,
 			@RequestParam(value = "appid", required = false) String appid) {
-		logger.info("Update order start. ");
-		logger.info("orderId = " + orderId);
-		logger.info("orderNumberPayment = " + orderNumberPayment);
-		logger.info("key = " + key);
-		logger.info("pay = " + pay);
-		logger.info("price = " + price);
-		logger.info("appid = " + appid);
+		logger.info(TAG + " Update order start, Order.orderId = " + orderId);
+		logger.info(TAG + " Update order start, Order.orderNumberPayment = "
+				+ orderNumberPayment);
+		logger.info(TAG + " Update order start, Order.key = " + key);
+		logger.info(TAG + " Update order start, Order.pay = " + pay);
+		logger.info(TAG + " Update order start, Order.price = " + price);
+		logger.info(TAG + " Update order start, Order.appid = " + appid);
 		try {
 			orderService.complete(orderId, orderNumberPayment, key, pay, price,
 					appid);
 		} catch (VideoException e) {
 			e.printStackTrace();
-			logger.error("Create order error, " + e);
+			logger.error(TAG + " Create order error, " + e);
 		}
 	}
 

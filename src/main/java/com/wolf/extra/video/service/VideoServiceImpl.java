@@ -53,6 +53,7 @@ public class VideoServiceImpl implements VideoService {
             video.setShortURL(shortURL);
             video.setPrice(0f);
             video.setStatus(Status.ON_FREE);
+            video.setDomain(domain);
             video = videoDao.update(video);
         }
         return video;
@@ -65,6 +66,7 @@ public class VideoServiceImpl implements VideoService {
             video.setShortURL("");
             video.setPrice(0f);
             video.setStatus(Status.OFF_SALE);
+            video.setDomain("");
             video = videoDao.update(video);
         }
         return video;

@@ -66,7 +66,7 @@ public class OrderDaoImpl implements OrderDao {
 		update.set("price", price); // 价格
 		update.set("completeTime", System.currentTimeMillis());
 		UpdateResult result = mongoTemplate.updateFirst(query, update,
-				Video.class);
+				Order.class);
 		if (result.getModifiedCount() == 1) {
 			return load(orderId);
 		}
