@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wolf.common.utils.EnandeUtil;
 import com.wolf.common.utils.NetworkUtil;
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
@@ -59,13 +60,18 @@ public class OrderController {
 						+ " Get order info execute, Order.orderNumber = "
 						+ order.getOrderNumber());
 				result.setOrder(order);
-				Video video = videoService.load(order.getVideoId());
-				if (video != null && order.getStatus() == 1) {
-					// 需要完成支付
-					Dentry denty = contentService.load(video.getDentryId());
-					video.setDentry(denty);
+				boolean isExpire = EnandeUtil.isExpire(order.getCompleteTime());
+				if (!isExpire) {
+					// 过期
+					Video video = videoService.load(order.getVideoId());
+					if (video != null && order.getStatus() == 1) {
+						// 需要完成支付
+						Dentry denty = contentService.load(video.getDentryId());
+						video.setDentry(denty);
+					}
+					result.setVideo(video);
+					result.generateCode(); // 生成唯一码
 				}
-				result.setVideo(video);
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
@@ -79,38 +85,55 @@ public class OrderController {
 
 	@RequestMapping(value = "/create/{videoId}")
 	public VideoOrderResp createOrder(HttpServletRequest request,
-			@PathVariable("videoId") String videoId) {
-		logger.info(TAG + " Create order start, video = " + videoId);
+			@PathVariable("videoId") String videoId,
+			@RequestParam(name = "code", required = false) String code) {
 		String ipAddress = NetworkUtil.getIpAddress(request);
+		logger.info(TAG + " Create order start, video = " + videoId);
 		logger.info(TAG + " Create order start, Ip address = " + ipAddress);
+		logger.info(TAG + " Create order start, code = " + code);
+
 		VideoOrderResp orderResp = new VideoOrderResp();
 		try {
+			// 超时
 			Video video = videoService.load(videoId);
+			Order oldOrder = orderService.validateCode(videoId, code);
+
+			logger.info(TAG + " Create order start, isExpire = "
+					+ (oldOrder == null));
 			if (video != null) {
 				orderResp.setVideo(video);
-				String orderNumber = System.currentTimeMillis() + "";
-				Random random = new Random();
-				for (int i = 0; i < 3; i++) {
-					orderNumber += random.nextInt(10);
+
+				// 支付未超时，设置价格为0，直接跳转到播放界面
+				if (oldOrder != null) {
+					video.setPrice(0);
+					orderResp.setOrder(oldOrder);
+				} else {
+					// 没有code，或者已支付超时，重新生成订单
+					String orderNumber = System.currentTimeMillis() + "";
+					Random random = new Random();
+					for (int i = 0; i < 3; i++) {
+						orderNumber += random.nextInt(10);
+					}
+					int status = 0;
+					if (com.wolf.extra.video.Status.ON_FREE.equals(video
+							.getStatus())) {
+						status = 1; // 免费的视频，直接完成订单
+					}
+					Order order = orderService.create(videoId, orderNumber,
+							ipAddress, status);
+					logger.info(TAG + " Create order start, Order.orderId = "
+							+ order.getOrderId());
+					logger.info(TAG
+							+ " Create order start, Order.orderNumber = "
+							+ order.getOrderNumber());
+					logger.info(TAG + " Create order start, Order.status = "
+							+ status);
+					logger.info(TAG + " Create order start, Video.price = "
+							+ video.getPrice());
+					logger.info(TAG + " Create order start, Video.status = "
+							+ video.getStatus());
+					orderResp.setOrder(order);
 				}
-				int status = 0;
-				if (com.wolf.extra.video.Status.ON_FREE.equals(video
-						.getStatus())) {
-					status = 1; // 免费的视频，直接完成订单
-				}
-				Order order = orderService.create(videoId, orderNumber,
-						ipAddress, status);
-				logger.info(TAG + " Create order start, Order.orderId = "
-						+ order.getOrderId());
-				logger.info(TAG + " Create order start, Order.orderNumber = "
-						+ order.getOrderNumber());
-				logger.info(TAG + " Create order start, Order.status = "
-						+ status);
-				logger.info(TAG + " Create order start, Video.price = "
-						+ video.getPrice());
-				logger.info(TAG + " Create order start, Video.status = "
-						+ video.getStatus());
-				orderResp.setOrder(order);
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();

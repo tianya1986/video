@@ -9,14 +9,14 @@
 		}
 	});
 
-	var LIMIT = 5;
+	var LIMIT = 10;
 	getVideoList(1, LIMIT);
 
 	function getVideoList (page , limit) {
 		var offset = (page - 1) * limit;
 		$.get("/video/list?offset=" + offset + "&limit=" + limit, function (data , status) {
 			var $tbody = $("#simple-table > tbody");
-			$tbody.empty()
+			$tbody.empty();
 			var items = data.items;
 			var html = "";
 			if (items != null) {
@@ -32,13 +32,18 @@
 
 	function createItem (video , $tr) {
 		$tr.empty();
-		$tr.append("<td><a href='#'>" + video.name + "</a></td>"); // 名称
+		$tr.append("<td>" + video.name + "</td>"); // 名称
 		$tr.append("<td class='center'>" + video.price + "元</td>"); // 价格
 		$tr.append("<td class='center'>" + video.clickNumber + "</td>"); // 点击次数
 		$tr.append("<td class='center'>" + getStatusName(video.status) + "</td>"); // 状态
 
-		var shortURL = video.shortURL == null ? "" : video.shortURL;
-		$tr.append("<td><a href='" + shortURL + "' target='_blank'>视频地址</a></td>"); // 短地址
+		var shortURL = video.shortURL == null ? null : video.shortURL;
+		if(shortURL==null){
+			$tr.append("<td></td>"); // 短地址
+		}else{
+			$tr.append("<td><a href='" + shortURL + "' target='_blank'>" + shortURL + "</a></td>"); // 短地址
+		}
+		
 		var domain = video.domain == null ? "" : video.domain;
 		$tr.append("<td>" + domain + "</td>"); // 域名
 		$tr.append("<td>" + dataFormat(video.createTime) + "</td>"); // 更新时间
@@ -141,10 +146,10 @@
 	function createPaginator (result , page) {
 		// 分页标签
 		var count = result.count;
-
+		var pages = Math.ceil(count / LIMIT);
 		$('#pageLimit').bootstrapPaginator({
 			currentPage : page,// 当前的请求页面。
-			totalPages : count / LIMIT,// 一共多少页。
+			totalPages : pages,// 一共多少页。
 			size : "normal",// 应该是页眉的大小。
 			bootstrapMajorVersion : 3,// bootstrap的版本要求。
 			alignment : "right",

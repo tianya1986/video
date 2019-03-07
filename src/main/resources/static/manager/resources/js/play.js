@@ -10,7 +10,13 @@
 		var $video = $("<video id='video-player' height='400' class='video-js' controls preload='auto'>")
 		var $videoSource = $("<source type'video/mp4''>");
 
-		if (data.order != null && data.video != null) {
+		if (data.order != null && data.video != null && data.video.dentry != null) {
+			if (data.video.status == 1) {
+				$.cookie(data.video.videoId, data.code, {
+					expires : 1
+				});
+			}
+			// $.cookie('the_cookie', 'the_value', { expires: 7 });
 			var src = "/resources/video/" + data.video.dentry.dentryId + "_" + data.video.dentry.name;
 			$videoSource.attr("src", src);
 			$video.attr("width", screenWidth);

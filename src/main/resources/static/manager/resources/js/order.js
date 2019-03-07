@@ -1,15 +1,21 @@
 (function a () {
 	var videoId = getUrlParam("videoId");
-	$.get("/order/create/" + videoId, function (data , status) {
+	var code = $.cookie(videoId);
+	var url = "/order/create/" + videoId;
+//	code = "NjMxMWUzYTMxMzI1NGRiZGJkYzM1MTEzYzg3NDZkZDV8NmFjMTMxZjRlMThhNDMyNzliNzUzMDJjNzAyN2ZjM2V8MTIz";
+	if (code != null) {
+		url = url + "?code=" + code;
+	}
+	$.get(url, function (data , status) {
 		if (data == null) {
 			alert("视频不存在");
 			return;
 		}
 		var price = data.video.price;
-		if(price > 0){
+		if (price > 0) {
 			var tradeNumber = data.order.orderNumber;
 			var url = "http://" + data.host + "/ldpay/alipay.php?out_trade_no=" + tradeNumber + "&cny=" + price + "&pay=3&total_fee=" + price + "&orderId=" + data.order.orderId;
-			 window.location.replace(url);
+			window.location.replace(url);
 		} else {
 			window.location.replace("./play.html?orderId=" + data.order.orderId);
 		}

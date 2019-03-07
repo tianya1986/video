@@ -26,7 +26,7 @@ public class ShortURLServiceImpl implements ShortURLService {
 			e.printStackTrace();
 		}
 
-		String requestUrl = "http://h5ip.cn/index/api??url=" + url;
+		String requestUrl = "http://suo.nz/api.php?url=" + url;
 		// ResponseEntity<String> reponseEntity =
 		// template.getForEntity(requestUrl, String.class, new HashMap<>());
 		ShortURL shortURL = new ShortURL();

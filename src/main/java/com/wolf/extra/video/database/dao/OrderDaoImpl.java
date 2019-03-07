@@ -58,13 +58,14 @@ public class OrderDaoImpl implements OrderDao {
 	 * @throws VideoException
 	 */
 	@Override
-	public Order complete(String orderId, String orderNumber, String key,
+	public Order complete(String orderId, String orderNumberPayment, String key,
 			String pay, String price, String appid) throws VideoException {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("orderId").is(orderId));
 		Update update = Update.update("status", 1); // 订单状态
 		update.set("price", price); // 价格
 		update.set("completeTime", System.currentTimeMillis());
+		update.set("orderNumberPayment", orderNumberPayment);
 		UpdateResult result = mongoTemplate.updateFirst(query, update,
 				Order.class);
 		if (result.getModifiedCount() == 1) {
