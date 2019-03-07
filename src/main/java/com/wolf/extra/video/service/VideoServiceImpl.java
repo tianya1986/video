@@ -22,6 +22,11 @@ public class VideoServiceImpl implements VideoService {
     public void save(Video video) throws VideoException {
         videoDao.save(video);
     }
+    
+    @Override
+    public boolean delete(String videoId) throws VideoException {
+        return videoDao.delete(videoId);
+    }
 
     @Override
     public Video load(String videoId) throws VideoException {

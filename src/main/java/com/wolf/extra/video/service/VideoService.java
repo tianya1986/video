@@ -15,7 +15,9 @@ public interface VideoService {
      * <p>Create author: wolf   </p>
      * @param video
      */
-    void save(Video video) throws VideoException;
+    public void save(Video video) throws VideoException;
+
+    public boolean delete(String videoId) throws VideoException;
 
     /**
      * <p>Description:  查询视频  </p>
