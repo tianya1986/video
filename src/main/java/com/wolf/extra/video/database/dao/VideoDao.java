@@ -13,6 +13,8 @@ public interface VideoDao {
      * @param video
      */
     public void save(Video video) throws VideoException;
+    
+    public boolean delete(String videoId) throws VideoException;
 
     /**
      * <p>Description:  加载视频详情            </p>

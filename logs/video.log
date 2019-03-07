@@ -104,3 +104,6 @@
 2019-03-07 00:50:00.027 INFO  [DESKTOP-D1PEDRM]  Query video list execute, limit = 5
 2019-03-07 00:50:01.769 INFO  [DESKTOP-D1PEDRM]  Query video list execute, offset = 0
 2019-03-07 00:50:01.769 INFO  [DESKTOP-D1PEDRM]  Query video list execute, limit = 5
+2019-03-07 21:13:47.325 INFO  [DESKTOP-D1PEDRM]  Starting VideoApplication on DESKTOP-D1PEDRM with PID 7052 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-07 21:13:47.325 INFO  [DESKTOP-D1PEDRM]  No active profile set, falling back to default profiles: default
+2019-03-07 21:13:47.969 INFO  [DESKTOP-D1PEDRM]  Started VideoApplication in 0.68 seconds (JVM running for 75490.798)

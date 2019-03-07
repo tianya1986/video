@@ -84,11 +84,21 @@
 			var $deleteButton = $("<button class='btn btn-xs btn-danger' style='margin-left:3px;'>删除</button>");
 			$deleteButton.click(video, function (event) {
 				var videoId = event.data.videoId;
+				var $button = $(this);
 				var message = confirm("确定删除？");
 				if (message == true) {
-					alert("是");
-				} else {
-				}
+					$.ajax({
+					    url: '/video/' + videoId,
+					    type: 'DELETE',
+					    success: function(result) {
+					    	if("success" == result){
+					    		$button.parent().parent().empty();
+					    	} else {
+					    		alert("删除失败");
+					    	}
+					    }
+					});
+				} 
 			});
 
 			$td.append($button);
