@@ -2,7 +2,6 @@
 	var videoId = getUrlParam("videoId");
 	var code = $.cookie(videoId);
 	var url = "/order/create/" + videoId;
-//	code = "NjMxMWUzYTMxMzI1NGRiZGJkYzM1MTEzYzg3NDZkZDV8NmFjMTMxZjRlMThhNDMyNzliNzUzMDJjNzAyN2ZjM2V8MTIz";
 	if (code != null) {
 		url = url + "?code=" + code;
 	}

@@ -27,8 +27,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order create(String videoId, String orderNumber, String ipAddress,
-			int status) throws VideoException {
-		return orderDao.create(videoId, orderNumber, ipAddress, status);
+			int status, String price) throws VideoException {
+		return orderDao.create(videoId, orderNumber, ipAddress, status, price);
 	}
 
 	/**
@@ -42,9 +42,11 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws VideoException
 	 */
 	@Override
-	public Order complete(String orderId, String orderNumberPayment, String key,
-			String pay, String price, String appid) throws VideoException {
-		return orderDao.complete(orderId, orderNumberPayment, key, pay, price, appid);
+	public Order complete(String orderId, String orderNumberPayment,
+			String key, String pay, String price, String appid)
+			throws VideoException {
+		return orderDao.complete(orderId, orderNumberPayment, key, pay, price,
+				appid);
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
 			}
 
 			long completeTime = order.getCompleteTime();
-			if(EnandeUtil.isExpire(completeTime)){
+			if (EnandeUtil.isExpire(completeTime)) {
 				// true 过期
 				long nowTime = System.currentTimeMillis();
 				logger.info(TAG + " Validate code, 支付完成时长（单位:分）："

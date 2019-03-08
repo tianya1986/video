@@ -55,12 +55,12 @@ public final class EnandeUtil {
 	}
 
 	public static void main(String[] args) {
-		String code = "6311e3a313254dbdbdc35113c8746dd5|"
+		String code = "a39b05c0e9d246929c344048c36fae11|"
 				+ "6ac131f4e18a43279b75302c7027fc3e|" + "123";
 		String result = encrypt(code);
 		System.out.println(result);
 
-		System.out.println(decrypt(result));
+		System.out.println(decrypt("YTM5YjA1YzBlOWQyNDY5MjljMzQ0MDQ4YzM2ZmFlMTF8NmFjMTMxZjRlMThhNDMyNzliNzUzMDJjNzAyN2ZjM2V8MTIz"));
 	}
 
 }

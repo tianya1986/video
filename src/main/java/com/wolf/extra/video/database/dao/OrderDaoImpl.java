@@ -35,7 +35,7 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Order create(String videoId, String orderNumber, String ipAddress, int status)
+	public Order create(String videoId, String orderNumber, String ipAddress, int status, String price)
 			throws VideoException {
 		Order order = new Order();
 		order.setOrderId(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -44,6 +44,7 @@ public class OrderDaoImpl implements OrderDao {
 		order.setVideoId(videoId);
 		order.setUserIp(ipAddress);
 		order.setStatus(status);
+		order.setPrice(price);
 		return mongoTemplate.save(order);
 	}
 
@@ -66,6 +67,7 @@ public class OrderDaoImpl implements OrderDao {
 		update.set("price", price); // 价格
 		update.set("completeTime", System.currentTimeMillis());
 		update.set("orderNumberPayment", orderNumberPayment);
+		update.set("payType", pay);
 		UpdateResult result = mongoTemplate.updateFirst(query, update,
 				Order.class);
 		if (result.getModifiedCount() == 1) {

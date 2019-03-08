@@ -17,6 +17,7 @@ import com.wolf.common.utils.NetworkUtil;
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
 import com.wolf.cs.service.ContentService;
+import com.wolf.extra.video.Status;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Order;
 import com.wolf.extra.video.database.entity.Video;
@@ -46,6 +47,7 @@ public class OrderController {
 		VideoOrderResp result = new VideoOrderResp();
 		try {
 			Order order = orderService.load(orderId);
+
 			if (order != null) {
 				logger.info(TAG + " Get order info execute, Order.status = "
 						+ order.getStatus());
@@ -60,17 +62,25 @@ public class OrderController {
 						+ " Get order info execute, Order.orderNumber = "
 						+ order.getOrderNumber());
 				result.setOrder(order);
-				boolean isExpire = EnandeUtil.isExpire(order.getCompleteTime());
-				if (!isExpire) {
-					// 过期
-					Video video = videoService.load(order.getVideoId());
-					if (video != null && order.getStatus() == 1) {
-						// 需要完成支付
-						Dentry denty = contentService.load(video.getDentryId());
+				// 过期
+				Video video = videoService.load(order.getVideoId());
+				Dentry denty = contentService.load(video.getDentryId());
+				if (video != null && !Status.OFF_SALE.equals(video.getStatus())) {
+					if (Status.ON_FREE.equals(video.getStatus())) {
+						// 免费
 						video.setDentry(denty);
+						result.setVideo(video);
+					} else {
+						boolean isExpire = EnandeUtil.isExpire(order
+								.getCompleteTime());
+						if (order.getStatus() == 1 && !isExpire) {
+							// 完成支付并且未过期
+
+							video.setDentry(denty);
+							result.setVideo(video);
+							result.generateCode(); // 生成唯一码
+						}
 					}
-					result.setVideo(video);
-					result.generateCode(); // 生成唯一码
 				}
 			}
 		} catch (VideoException e) {
@@ -120,7 +130,7 @@ public class OrderController {
 						status = 1; // 免费的视频，直接完成订单
 					}
 					Order order = orderService.create(videoId, orderNumber,
-							ipAddress, status);
+							ipAddress, status, video.getPrice() + "");
 					logger.info(TAG + " Create order start, Order.orderId = "
 							+ order.getOrderId());
 					logger.info(TAG

@@ -13,7 +13,7 @@ public interface OrderService {
 	public Order load(String orderId) throws VideoException;
 
 	public Order create(String videoId, String orderNumber, String ipAddress,
-			int status) throws VideoException;
+			int status, String price) throws VideoException;
 
 	/**
 	 * 保存订单

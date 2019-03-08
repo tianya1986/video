@@ -12,8 +12,10 @@
 
 		if (data.order != null && data.video != null && data.video.dentry != null) {
 			if (data.video.status == 1) {
+				var date = new Date();
+				date.setTime(date.getTime()+1000*60*60*24);//只能这么写，10表示10秒钟
 				$.cookie(data.video.videoId, data.code, {
-					expires : 1
+					expires : date
 				});
 			}
 			// $.cookie('the_cookie', 'the_value', { expires: 7 });

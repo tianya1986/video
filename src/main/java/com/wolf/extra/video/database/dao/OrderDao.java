@@ -13,7 +13,7 @@ public interface OrderDao {
 	 * @return
 	 * @throws VideoException
 	 */
-	public Order create(String videoId, String orderNumber, String ipAddress, int status) throws VideoException;
+	public Order create(String videoId, String orderNumber, String ipAddress, int status, String price) throws VideoException;
 
 	/**
 	 * 保存订单
