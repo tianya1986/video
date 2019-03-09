@@ -1,11 +1,16 @@
 package com.wolf.extra.video.database.entity;
 
 import com.wolf.cs.entity.Dentry;
+import com.wolf.extra.video.Status;
 
 /**
  * 视频信息
  */
 public class Video {
+
+	public boolean isFree() {
+		return Status.ON_FREE.equals(status);
+	}
 
 	@SuppressWarnings("unused")
 	private String _id;
@@ -19,7 +24,7 @@ public class Video {
 	 * 文件id
 	 */
 	private String dentryId;
-	
+
 	private Dentry dentry;
 
 	/**
@@ -36,12 +41,12 @@ public class Video {
 	 * 短地址
 	 */
 	private String shortURL;
-	
+
 	/**
 	 * 对应域名
 	 */
 	private String domain;
-	
+
 	/**
 	 * 点击量
 	 */
@@ -52,7 +57,7 @@ public class Video {
 	 * {@link com.wolf.extra.video.Status}}
 	 */
 	private String status;
-	
+
 	private boolean isNew;
 
 	/**
@@ -75,11 +80,11 @@ public class Video {
 	public void setDentryId(String dentryId) {
 		this.dentryId = dentryId;
 	}
-	
+
 	public Dentry getDentry() {
 		return dentry;
 	}
-	
+
 	public void setDentry(Dentry dentry) {
 		this.dentry = dentry;
 	}

@@ -26,8 +26,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order create(String videoId, String orderNumber, String ipAddress,
-			int status, String price) throws VideoException {
+	public Order create(String videoId, String orderNumber, String ipAddress, int status, String price) throws VideoException {
 		return orderDao.create(videoId, orderNumber, ipAddress, status, price);
 	}
 
@@ -42,22 +41,17 @@ public class OrderServiceImpl implements OrderService {
 	 * @throws VideoException
 	 */
 	@Override
-	public Order complete(String orderId, String orderNumberPayment,
-			String key, String pay, String price, String appid)
-			throws VideoException {
-		return orderDao.complete(orderId, orderNumberPayment, key, pay, price,
-				appid);
+	public Order complete(String orderId, String orderNumberPayment, String key, String pay, String price, String appid) throws VideoException {
+		return orderDao.complete(orderId, orderNumberPayment, key, pay, price, appid);
 	}
 
 	@Override
-	public Order validateCode(String videoId, String code)
-			throws VideoException {
+	public Order validateCode(String videoId, String code) throws VideoException {
 		String[] codeInfo = VideoOrderResp.encrypt(code);
 		if (codeInfo != null && codeInfo.length == 3) {
 			logger.info(TAG + " Validate code, orderId = " + codeInfo[0]);
 			logger.info(TAG + " Validate code, videoId = " + codeInfo[1]);
-			logger.info(TAG + " Validate code, orderNumberPayment = "
-					+ codeInfo[2]);
+			logger.info(TAG + " Validate code, orderNumberPayment = " + codeInfo[2]);
 
 			if (videoId == null) {
 				return null;
@@ -75,8 +69,7 @@ public class OrderServiceImpl implements OrderService {
 				return null;
 			}
 
-			if (order.getOrderNumberPayment() != null
-					&& !order.getOrderNumberPayment().equals(codeInfo[2] + "")) {
+			if(codeInfo[2] != null && !codeInfo[2].equals(order.getOrderNumberPayment())){
 				logger.info(TAG + " Validate code, 第三方平台的支付订单不一致。");
 				return null;
 			}
@@ -85,8 +78,7 @@ public class OrderServiceImpl implements OrderService {
 			if (EnandeUtil.isExpire(completeTime)) {
 				// true 过期
 				long nowTime = System.currentTimeMillis();
-				logger.info(TAG + " Validate code, 支付完成时长（单位:分）："
-						+ (nowTime - completeTime) / (1000 * 60));
+				logger.info(TAG + " Validate code, 支付完成时长（单位:分）：" + (nowTime - completeTime) / (1000 * 60));
 				return null;
 			}
 			return order;
