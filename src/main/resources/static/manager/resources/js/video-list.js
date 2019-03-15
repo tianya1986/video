@@ -45,8 +45,8 @@
 		}
 		
 		var domain = video.domain == null ? "" : video.domain;
-		$tr.append("<td>" + domain + "</td>"); // 域名
-		$tr.append("<td>" + dataFormat(video.createTime) + "</td>"); // 更新时间
+		$tr.append("<td class='center'>" + domain + "</td>"); // 域名
+		$tr.append("<td class='center' >" + dataFormat(video.createTime) + "</td>"); // 更新时间
 
 		if (video.status == "0") {
 			var $button = $("<button class='btn btn-xs btn-success'>上架</button>");
@@ -68,6 +68,7 @@
 							};
 							json_data.price = $("#input_price").val();
 							json_data.domainId = $("#domainSelect").val();
+							json_data.platform = $("#platform").val();
 							$.post("/video/" + videoId + "/action/onsale", json_data, function (video) {
 								button.removeAttr("disabled")
 								button.attr("disabled", "disabled");

@@ -37,4 +37,6 @@ public interface ContentService {
      * @throws ContentException
      */
     public List<Dentry> query() throws ContentException;
+    
+    public void delete(String dentryId) throws ContentException;
 }

@@ -58,6 +58,17 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group">
+									<label class="col-sm-3 control-label textAlignRight" for="input_price"> 支付渠道： </label>
+									<div class="col-sm-9">
+										<select class="form-control col-xs-9" name="platform" id="platform">
+											<option value="upay">upay</option>
+											<option value="payjs">payjs</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<div class="form-group">
 									<label class="col-sm-3 control-label textAlignRight" for="input_price"> 视频价格： </label>
 									<div class="col-sm-9">
 										<input type="text" id="input_price" value="" placeholder="价格" class="col-xs-10 col-xs-9" onkeyup="value=value.replace(/[^\d\.]/g,'')" />
@@ -82,14 +93,14 @@
 							<table id="simple-table" class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										<th>名称</th>
-										<th class="center">价格</th>
-										<th class="center">点击量</th>
-										<th class="center">状态</th>
-										<th>短地址</th>
-										<th>域名</th>
-										<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>上传时间</th>
-										<th>操作</th>
+										<th class="col-xs-3">名称</th>
+										<th class="center" style="width:50px;">价格</th>
+										<th class="center" style="width:50px;">点击量</th>
+										<th class="center" style="width:60px;">状态</th>
+										<th >短地址</th>
+										<th class="center" style="width:130px;">域名</th>
+										<th class="center" style="width:140px;"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>上传时间</th>
+										<th style="width:120px;">操作</th>
 									</tr>
 								</thead>
 								<tbody>

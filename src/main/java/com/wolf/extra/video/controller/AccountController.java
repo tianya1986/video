@@ -26,18 +26,9 @@ public class AccountController {
 	 * <p>Create Time: 2019年1月24日   </p>
 	 * <p>Create author: Administrator   </p>
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/")
 	public String goLogin(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user") != null) {
-			return "manager/video-list";
-		}
-		UserInfo user = accountService.load("18065104745");
-		if (user == null) {
-			accountService.save("18065104745", "123456");
-		}
-
-		return "login";
+		return "index.html";
 	}
 
 	/**

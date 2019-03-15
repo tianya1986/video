@@ -6,6 +6,11 @@ package com.wolf.extra.video.database.entity;
  *
  */
 public class Order {
+	
+	/**
+	 * mongodb 唯一键
+	 */
+	private String _id;
 
 	/**
 	 * 订单id UUID
@@ -61,6 +66,11 @@ public class Order {
 	 * 当完成支付
 	 */
 	private long completeTime;
+	
+
+	public String get_id() {
+		return _id;
+	}
 
 	public String getOrderId() {
 		return orderId;

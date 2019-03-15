@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wolf.common.utils.DateUtil;
 import com.wolf.common.utils.FileUtil;
 import com.wolf.cs.CSConfig;
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
 import com.wolf.cs.service.ContentService;
+import com.wolf.extra.order.OrderConfig;
 import com.wolf.extra.video.Status;
 import com.wolf.extra.video.VideoException;
 import com.wolf.extra.video.database.entity.Video;
@@ -40,23 +43,23 @@ import com.wolf.paging.Result;
 @RequestMapping("/video")
 public class VideoController {
 
-	private Logger logger = LoggerFactory.getLogger(VideoController.class);
+	private Logger				logger	= LoggerFactory.getLogger(VideoController.class);
 
 	@Autowired
-	private ContentService contentService; // cs服务
+	private ContentService		contentService;											// cs服务
 
 	@Autowired
-	private VideoService videoService; // 视频服务
+	private VideoService		videoService;												// 视频服务
 
 	@Autowired
-	private ShortURLService shortURLService; // 短地址服务
+	private ShortURLService		shortURLService;											// 短地址服务
 
 	@Autowired
-	private VideoDomainService domainService; // 域名服务
+	private VideoDomainService	domainService;												// 域名服务
 
 	@Value("${content.service.path.video}")
-	private String mVideoPath; // 视频地址
-
+	private String				mVideoPath;												// 视频地址
+	
 	/**
 	 * 获取视频详情
 	 * @param videoId
@@ -87,13 +90,26 @@ public class VideoController {
 	public String deleteVideo(@PathVariable("videoId") String videoId) {
 		logger.info("Delete video start, video id = " + videoId);
 		try {
-			boolean result = videoService.delete(videoId);
-			if (result) {
+			Video video = videoService.load(videoId);
+			if (video != null) {
+				videoService.delete(videoId);
+				Dentry dentry = contentService.load(video.getDentryId());
+				if (dentry != null) {
+					File file = new File(dentry.getPath());
+					if (file != null) {
+						file.delete();
+					}
+					contentService.delete(dentry.getDentryId());
+				}
 				return "success";
 			}
+
 		} catch (VideoException e) {
 			e.printStackTrace();
 			logger.error("Get video error, " + e);
+		} catch (ContentException e) {
+			e.printStackTrace();
+			logger.error("Delete dentry error, " + e);
 		}
 		return "fail";
 	}
@@ -104,12 +120,16 @@ public class VideoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{videoId}/action/onsale", method = RequestMethod.POST)
-	public Video onSale(HttpServletRequest request, @PathVariable("videoId") String videoId, @RequestParam(value = "price", required = true) float price,
-			@RequestParam(value = "domainId", required = true) String domainId) {
-		logger.debug("Update order start. ");
-		logger.debug("videoId = " + videoId);
-		logger.debug("price = " + price);
-		logger.debug("domainId = " + domainId);
+	public Video onSale(HttpServletRequest request,
+			@PathVariable("videoId") String videoId,
+			@RequestParam(value = "price", required = true) float price,
+			@RequestParam(value = "domainId", required = true) String domainId,
+			@RequestParam(value = "platform", defaultValue = "upay") String platform) {
+		logger.info("Update order start. ");
+		logger.info("videoId = " + videoId);
+		logger.info("price = " + price);
+		logger.info("domainId = " + domainId);
+		logger.info("platform = " + platform);
 
 		Video video = null;
 		try {
@@ -128,8 +148,11 @@ public class VideoController {
 					hostAddress = domain.getDomain();
 				}
 				logger.debug("hostAddress = " + hostAddress);
-
 				String videoUrl = "http://" + hostAddress + "/manager/order-v2.html?videoId=" + video.getVideoId();
+				if (OrderConfig.Platform.PAYJS.equals(platform)) {
+					videoUrl = "http://" + hostAddress + "/manager/video/v2/order.html?videoId=" + video.getVideoId();
+				}
+
 				// String shortUrl = getShortUrl(videoUrl);
 				String shortUrl = videoUrl;
 				logger.debug("videoUrl = " + videoUrl);
@@ -169,8 +192,10 @@ public class VideoController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Result<Video> listUser(HttpServletRequest request, @RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
-			@RequestParam(name = "limit", required = false, defaultValue = "10") int limit, @RequestParam(name = "status", required = false) String status) {
+	public Result<Video> listUser(HttpServletRequest request,
+			@RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
+			@RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
+			@RequestParam(name = "status", required = false) String status) {
 		logger.info("Query video list execute, offset = " + offset);
 		logger.info("Query video list execute, limit = " + limit);
 		Result<Video> result = null;
@@ -195,7 +220,9 @@ public class VideoController {
 		long fileSize = file.getSize(); // 文件大小
 		String contentType = file.getContentType(); // mime
 		String suffix = FileUtil.getSuffix(fileName); // 拓展名
-		String filePath = mVideoPath + File.separator + dentryId + "_" + fileName; // 文件存储路径
+
+		String name = DateUtil.convert2String(new Date(), DateUtil.FORMAT_1);
+		String filePath = mVideoPath + "/" + dentryId + "_" + name + suffix; // 文件存储路径
 
 		File target = new File(filePath);
 		try {

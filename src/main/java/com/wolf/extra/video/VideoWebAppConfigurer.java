@@ -1,16 +1,11 @@
 package com.wolf.extra.video;
 
-import java.nio.charset.Charset;
-import java.util.List;
-
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.unit.DataSize;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,7 +27,6 @@ public class VideoWebAppConfigurer implements WebMvcConfigurer {
 		// 设置总上传数据总大小
 		factory.setMaxRequestSize(DataSize.ofGigabytes(1));
 		return factory.createMultipartConfig();
-
 	}
 
 	/**
@@ -43,11 +37,6 @@ public class VideoWebAppConfigurer implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		registry.addResourceHandler("/resources/**")
-//				.addResourceLocations("classpath:/static/");
-//		registry.addResourceHandler("/manager/**").addResourceLocations(
-//				"classpath:/static/manager/");
-
 		if (videRootPath.equals("") || videRootPath.equals("${cbs.imagesPath}")) {
 			String imagesPath = VideoWebAppConfigurer.class.getClassLoader()
 					.getResource("").getPath();
@@ -71,20 +60,4 @@ public class VideoWebAppConfigurer implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		System.out.print("2.上传配置类videRootPath==" + videRootPath + "\n");
 	}
-
-	@Override
-	public void configureMessageConverters(
-			List<HttpMessageConverter<?>> converters) {
-		StringHttpMessageConverter converter = new StringHttpMessageConverter(
-				Charset.forName("UTF-8"));
-		converters.add(converter);
-	}
-
-	// @Override
-	// public void configureMessageConverters(List<HttpMessageConverter<?>>
-	// converters) {
-	// StringHttpMessageConverter converter = new
-	// StringHttpMessageConverter(Charset.forName("UTF-8"));
-	// converters.add(converter);
-	// }
 }

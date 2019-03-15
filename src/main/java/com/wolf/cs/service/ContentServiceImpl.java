@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.wolf.cs.ContentException;
 import com.wolf.cs.entity.Dentry;
-import com.wolf.extra.video.database.entity.Video;
 
 /**
  * 内容服务方法
@@ -45,5 +44,11 @@ public class ContentServiceImpl implements ContentService {
 	@Override
 	public List<Dentry> query() throws ContentException {
 		return null;
+	}
+	
+	@Override
+	public void delete(String dentryId) throws ContentException {
+		Query query = new Query(Criteria.where("dentryId").is(dentryId));
+		mongoTemplate.remove(query, Dentry.class);
 	}
 }
