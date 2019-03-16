@@ -115,19 +115,19 @@ public class OrderV2Controller {
 			Result<OrderV2> paidOrders = orderV2Service.query(uid, videoId, OrderV2.Status.PAID, OrderConfig.Platform.PAYJS, expireTime);
 			if (paidOrders != null && paidOrders.getCount() > 0) {
 				// 已支付且在有效期内的订单
-				logger.info(TAG + " Make order, Order old,  paid.." );
+				logger.info(TAG + " Make order, Order old,  paid..");
 				OrderV2 order = paidOrders.getItems().get(0);
 				data.setOrder(order);
 			} else {
 				// 查询未支付的订单
 				Result<OrderV2> unPaidOrders = orderV2Service.query(uid, videoId, OrderV2.Status.UN_PAID, OrderConfig.Platform.PAYJS, 0);
 				if (unPaidOrders != null && unPaidOrders.getCount() > 0) {
-					logger.info(TAG + " Make order, Order old, un paid " );
+					logger.info(TAG + " Make order, Order old, un paid ");
 					OrderV2 order = unPaidOrders.getItems().get(0);
 					data.setOrder(order);
 				} else {
 					// 创建订单
-					logger.info(TAG + " Make order, Create order." );
+					logger.info(TAG + " Make order, Create order.");
 					OrderV2 order = orderV2Service.create(uid, OrderConfig.Platform.PAYJS, videoId, userIpAddress);
 					data.setOrder(order);
 				}
@@ -160,6 +160,9 @@ public class OrderV2Controller {
 			@PathVariable("orderId") String orderId) {
 		try {
 			OrderV2 order = orderV2Service.load(orderId);
+			if (order == null) {
+				return new Response(Response.ERROR, "找不到订单");
+			}
 			if (OrderV2.Status.PAID.equals(order.getStatus())) {
 				// 完成支付
 				return new Response("");

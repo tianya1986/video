@@ -13,7 +13,7 @@
 		var $video = $("<video id='video-player' height='400' class='video-js' controls preload='auto'>")
 		var $videoSource = $("<source type'video/mp4''>");
 
-		var src = "/resources/video/" + video.dentry.dentryId + "_" +video.dentry.name;
+		var src = "/resources/video/" +video.dentry.name;
 		$videoSource.attr("src", src);
 		$video.attr("width", screenWidth);
 		$video.attr("height", screenHeight / 2);

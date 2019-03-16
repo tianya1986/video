@@ -32,10 +32,12 @@ public class OrderV2 {
 	private String				payType;			// 支付渠道 1 支付宝, 2财付通, 3 微信
 	private int					price;				// 价格 单位：分
 	private String				status;			// 订单完成状态
-	private String				completeTime;		// 订单完成时间
+	private long				completeTime;		// 订单完成时间
+	private String				completeTimeStr;	// 订单完成时间
 	private Map<String, Object>	expInfo;			// 拓展参数
 	private String				ip;				// 订单用户ip
-	private String				createTime;		// 订单生成时间
+	private String				createTimeStr;		// 订单生成时间
+	private long				createTime;		// 订单生成时间
 
 	public String get_id() {
 		return _id;
@@ -101,6 +103,14 @@ public class OrderV2 {
 		return price;
 	}
 
+	public String getCompleteTimeStr() {
+		return completeTimeStr;
+	}
+
+	public void setCompleteTimeStr(String completeTimeStr) {
+		this.completeTimeStr = completeTimeStr;
+	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -121,19 +131,27 @@ public class OrderV2 {
 		this.ip = ip;
 	}
 
-	public String getCompleteTime() {
+	public long getCompleteTime() {
 		return completeTime;
 	}
 
-	public void setCompleteTime(String completeTime) {
+	public void setCompleteTime(long completeTime) {
 		this.completeTime = completeTime;
 	}
 
-	public String getCreateTime() {
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+	public long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
 	}
 

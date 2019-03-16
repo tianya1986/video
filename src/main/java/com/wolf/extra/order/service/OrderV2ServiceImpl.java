@@ -29,7 +29,8 @@ public class OrderV2ServiceImpl implements OrderV2Service {
 			String ip) throws VideoException {
 		OrderV2 order = new OrderV2();
 		String orderNumber = OrderHelper.makeOrderNumber();
-		String createTime = DateUtil.convert2String(new Date(), DateUtil.ORACLE_DATETIME_FORMAT);
+		Date createTime = new Date();
+		String createTimeStr = DateUtil.convert2String(createTime, DateUtil.ORACLE_DATETIME_FORMAT);
 		String orderId = OrderHelper.makeOrderId();
 
 		order.setUid(uid);
@@ -38,7 +39,8 @@ public class OrderV2ServiceImpl implements OrderV2Service {
 		order.setVideoId(videoId); // 订单视频
 		order.setOrderNumber(orderNumber); // 订单编号
 		order.setStatus(OrderV2.Status.UN_PAID); // 订单状态：未支付
-		order.setCreateTime(createTime); // 订单创建时间
+		order.setCreateTime(createTime.getTime()); // 订单创建时间
+		order.setCreateTimeStr(createTimeStr);
 		order.setIp(ip); // 用户ip
 		return orderDao.create(order);
 	}
@@ -65,11 +67,13 @@ public class OrderV2ServiceImpl implements OrderV2Service {
 			throw new VideoException("Can not found order, orderId = " + orderId);
 		}
 
-		String completeTime = DateUtil.convert2String(new Date(), DateUtil.ORACLE_DATETIME_FORMAT);
+		Date completeTime = new Date();
+		String completeTimeStr = DateUtil.convert2String(completeTime, DateUtil.ORACLE_DATETIME_FORMAT);
 
 		order.setPlatform(platform);
 		order.setOrderNumberPayment(orderNumberPayment);
-		order.setCompleteTime(completeTime);
+		order.setCompleteTime(completeTime.getTime());
+		order.setCompleteTimeStr(completeTimeStr);
 		order.setPrice(price); // 价格
 		order.setPayType(payType);
 		order.setStatus(OrderV2.Status.PAID); // 已支付

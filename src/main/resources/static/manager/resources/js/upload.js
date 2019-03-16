@@ -31,6 +31,14 @@
 			return;
 		}
 		
+		var fileType = $("#fileType").val();
+		if(fileType == null || fileType == ""){
+			alert("文件类型不能为空，你的文件没有拓展名");
+			// 上传按钮禁用
+			$(this).attr('disabled', false);
+			return;
+		}
+		
 		// 进度条归零
 		setProgress(0);
 		

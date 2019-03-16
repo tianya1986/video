@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,11 @@ import com.wolf.extra.video.service.VideoDomainService;
 @RequestMapping("/domain")
 public class VideoDomainController {
 
+	private final static String	TAG		= "VideoDomainController";
+	private Logger				logger	= LoggerFactory.getLogger(VideoDomainController.class);
+
 	@Autowired
-	private VideoDomainService domainService; // 域名服务类
+	private VideoDomainService	domainService;													// 域名服务类
 
 	/**
 	 * 查询域名列表
@@ -35,6 +40,7 @@ public class VideoDomainController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<VideoDomain> listDomain(HttpServletRequest request) {
+		logger.info(TAG, "Get domain list.");
 		List<VideoDomain> result = null;
 		try {
 			result = domainService.findAll();
@@ -66,12 +72,10 @@ public class VideoDomainController {
 	 * @return
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public VideoDomain save(
-			@RequestParam(value = "domain", required = true) String domain) {
+	public VideoDomain save(@RequestParam(value = "domain", required = true) String domain) {
 		VideoDomain videoDomain = new VideoDomain();
 		videoDomain.setDomain(domain);
-		videoDomain.setDomainId(UUID.randomUUID().toString()
-				.replaceAll("-", ""));
+		videoDomain.setDomainId(UUID.randomUUID().toString().replaceAll("-", ""));
 		videoDomain.setCreateTime(System.currentTimeMillis());
 		try {
 			return domainService.save(videoDomain);

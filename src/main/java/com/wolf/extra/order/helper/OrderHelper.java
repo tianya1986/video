@@ -1,13 +1,11 @@
 package com.wolf.extra.order.helper;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.wolf.common.utils.DateUtil;
 import com.wolf.common.utils.EnandeUtil;
 import com.wolf.common.utils.StringUtil;
 import com.wolf.extra.order.OrderConfig;
@@ -60,11 +58,7 @@ public final class OrderHelper {
 		if (order == null || OrderV2.Status.PAID.equals(order.getStatus())) {
 			return false;
 		}
-		Date date = DateUtil.convert2Date(order.getCompleteTime(), DateUtil.ORACLE_DATETIME_FORMAT);
-		if (date != null) {
-			return isExpire(date.getTime());
-		}
-		return false;
+		return isExpire(order.getCompleteTime());
 	}
 
 	public static boolean isExpire(long completeTime) {

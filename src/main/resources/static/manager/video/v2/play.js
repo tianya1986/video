@@ -14,7 +14,7 @@
 		var $videoSource = $("<source type'video/mp4''>");
 
 		if (data.data != null && data.data.dentry != null) {
-			var src = "/resources/video/" + data.data.dentry.dentryId + "_" + data.data.dentry.name;
+			var src = "/resources/video/" + data.data.dentry.name;
 			$videoSource.attr("src", src);
 			$video.attr("width", screenWidth);
 			$video.attr("height", screenHeight / 2);

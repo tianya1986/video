@@ -7,10 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.springframework.aop.ThrowsAdvice;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.wolf.extra.video.database.entity.Video;
 
 /**
  * 文件操作类
@@ -45,7 +42,7 @@ public final class FileUtil {
 				return filename.substring(dot + 1);
 			}
 		}
-		return filename;
+		return "";
 	}
 
 	public static void transferTo(MultipartFile source, File target)

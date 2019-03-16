@@ -51,3 +51,204 @@
 2019-03-16 00:25:54.918 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 5720 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
 2019-03-16 00:25:54.918 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
 2019-03-16 00:25:55.442 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.55 seconds (JVM running for 278.955)
+2019-03-16 00:31:47.541 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 5812 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 00:31:47.547 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 00:31:51.222 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.164 seconds (JVM running for 4.591)
+2019-03-16 00:32:07.955 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 5812 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 00:32:07.955 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 00:32:08.702 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.778 seconds (JVM running for 22.071)
+2019-03-16 00:32:13.136 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 7428 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 00:32:13.138 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 00:32:16.899 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.153 seconds (JVM running for 4.551)
+2019-03-16 00:32:26.207 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 7428 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 00:32:26.207 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 00:32:26.945 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.771 seconds (JVM running for 14.596)
+2019-03-16 00:33:56.855 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 1188 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 00:33:56.857 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 00:34:00.942 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.442 seconds (JVM running for 4.846)
+2019-03-16 16:02:50.559 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 8416 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:02:50.561 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:02:54.393 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.215 seconds (JVM running for 4.614)
+2019-03-16 16:16:21.332 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 9736 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:16:21.334 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:16:25.459 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.52 seconds (JVM running for 4.974)
+2019-03-16 16:16:39.996 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:16:40.005 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:16:40.006 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:16:49.029 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:16:51.865 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:16:59.525 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:16:59.527 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:16:59.527 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:17:04.867 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 16:17:04.867 INFO  [DESKTOP-D1PEDRM] videoId = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:17:04.868 INFO  [DESKTOP-D1PEDRM] price = 0.5
+2019-03-16 16:17:04.868 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 16:17:04.868 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 16:17:05.988 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, videoId = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:17:05.990 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, user ip = 0:0:0:0:0:0:0:1
+2019-03-16 16:17:05.991 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, host = localhost:7777
+2019-03-16 16:17:05.991 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, uid = 8e95fe52-02f3-b3bb-d623-8668ee2c95ca
+2019-03-16 16:17:06.069 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Create order.
+2019-03-16 16:17:06.282 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.orderId = fcc1485d6a9245cd837c51e27616c59f
+2019-03-16 16:17:06.282 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.orderNumber = 1552724226071857
+2019-03-16 16:17:06.282 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.status = UN_PAID
+2019-03-16 16:17:06.282 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, payUrl = https://payjs.cn/api/cashier?mchid=1524053761&notify_url=http://www.lincolor112.live/v2/order/payjs/complete&callback_url=http://localhost:7777/manager/video/v2/play-forward.html?orderId=fcc1485d6a9245cd837c51e27616c59f&out_trade_no=fcc1485d6a9245cd837c51e27616c59f&total_fee=50&sign=109969F9649521F5AED9B529438944B2
+2019-03-16 16:26:55.284 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 5876 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:26:55.287 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:26:59.254 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.365 seconds (JVM running for 4.778)
+2019-03-16 16:27:00.913 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:27:00.922 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:27:00.923 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:27:31.888 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 5876 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:27:31.889 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:27:32.736 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.877 seconds (JVM running for 38.26)
+2019-03-16 16:27:37.911 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:27:37.914 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:27:37.914 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:27:42.425 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 16:27:42.426 INFO  [DESKTOP-D1PEDRM] videoId = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:27:42.426 INFO  [DESKTOP-D1PEDRM] price = 0.0
+2019-03-16 16:27:42.426 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 16:27:42.426 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 16:27:44.118 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:27:57.906 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:29:31.142 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 1916 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:29:31.144 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:29:34.784 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.054 seconds (JVM running for 4.466)
+2019-03-16 16:29:48.745 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:29:53.018 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:33:05.046 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 1916 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:33:05.047 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:33:05.780 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.767 seconds (JVM running for 215.461)
+2019-03-16 16:34:53.637 INFO  [DESKTOP-D1PEDRM] Delete video start, video id = 4886fbbc9ec54eb4a948b98aa58fcfbf
+2019-03-16 16:35:19.910 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:35:19.912 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:35:19.912 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:37:39.034 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 7676 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:37:39.038 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:37:42.963 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.346 seconds (JVM running for 4.743)
+2019-03-16 16:37:56.159 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:37:56.176 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:37:56.177 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:38:09.502 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:38:09.505 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:38:09.505 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:38:12.138 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:38:12.139 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:38:12.139 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:39:45.692 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:39:45.694 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:39:49.240 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 3.942 seconds (JVM running for 4.349)
+2019-03-16 16:39:57.800 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:39:57.810 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:39:57.811 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:40:10.564 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:40:10.565 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:40:10.565 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:41:43.786 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:41:43.787 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:41:44.624 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.873 seconds (JVM running for 119.733)
+2019-03-16 16:42:03.422 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:42:03.422 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:42:04.054 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.671 seconds (JVM running for 139.161)
+2019-03-16 16:42:35.021 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:42:35.021 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:42:35.646 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.655 seconds (JVM running for 170.754)
+2019-03-16 16:42:51.338 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:42:51.338 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:42:51.939 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.631 seconds (JVM running for 187.047)
+2019-03-16 16:43:06.043 INFO  [DESKTOP-D1PEDRM] Delete video start, video id = d273589c946942609662e4d2516f9415
+2019-03-16 16:43:09.320 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:43:09.323 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:43:09.323 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:43:21.256 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:43:21.256 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:43:21.256 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:43:44.659 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 16:43:44.660 INFO  [DESKTOP-D1PEDRM] videoId = 53f55029670245ed81ab7bad341d0cd2
+2019-03-16 16:43:44.660 INFO  [DESKTOP-D1PEDRM] price = 0.0
+2019-03-16 16:43:44.660 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 16:43:44.660 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 16:43:49.165 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 53f55029670245ed81ab7bad341d0cd2
+2019-03-16 16:43:55.635 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 53f55029670245ed81ab7bad341d0cd2
+2019-03-16 16:44:47.518 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 53f55029670245ed81ab7bad341d0cd2
+2019-03-16 16:46:59.052 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:46:59.053 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:46:59.575 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.554 seconds (JVM running for 434.683)
+2019-03-16 16:47:22.971 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:47:22.973 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:47:22.976 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:47:43.645 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:47:43.649 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:47:43.650 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:47:48.971 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 16:47:48.971 INFO  [DESKTOP-D1PEDRM] videoId = 5e7499c35d9449749ad68217d3dc5050
+2019-03-16 16:47:48.971 INFO  [DESKTOP-D1PEDRM] price = 0.0
+2019-03-16 16:47:48.971 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 16:47:48.971 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 16:47:51.553 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 5e7499c35d9449749ad68217d3dc5050
+2019-03-16 16:47:57.744 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 5e7499c35d9449749ad68217d3dc5050
+2019-03-16 16:48:54.653 INFO  [DESKTOP-D1PEDRM] Get video start, video id = 5e7499c35d9449749ad68217d3dc5050
+2019-03-16 16:49:47.831 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 12152 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 16:49:47.832 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 16:49:48.386 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 0.587 seconds (JVM running for 603.494)
+2019-03-16 16:50:10.952 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:50:10.955 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:50:10.955 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:50:16.057 INFO  [DESKTOP-D1PEDRM] Delete video start, video id = 5e7499c35d9449749ad68217d3dc5050
+2019-03-16 16:50:28.721 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:50:28.722 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:50:28.722 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:50:33.640 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 16:50:33.640 INFO  [DESKTOP-D1PEDRM] videoId = b571b7f725f540c79776c8e6cc9b24de
+2019-03-16 16:50:33.640 INFO  [DESKTOP-D1PEDRM] price = 0.0
+2019-03-16 16:50:33.640 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 16:50:33.640 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 16:50:36.067 INFO  [DESKTOP-D1PEDRM] Get video start, video id = b571b7f725f540c79776c8e6cc9b24de
+2019-03-16 16:54:21.135 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 16:54:21.136 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 16:54:21.136 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 16:54:26.549 INFO  [DESKTOP-D1PEDRM] Delete video start, video id = 72ece6e6ce6a475d92a15fbd8f04e2ef
+2019-03-16 17:30:42.331 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 1564 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 17:30:42.333 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 17:30:45.916 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 3.94 seconds (JVM running for 4.356)
+2019-03-16 17:32:03.896 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 17:32:03.909 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 17:32:03.910 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 17:33:07.759 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, videoId = null
+2019-03-16 17:33:07.759 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, user ip = 0:0:0:0:0:0:0:1
+2019-03-16 17:33:07.759 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, host = localhost:7777
+2019-03-16 17:33:07.759 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, uid = 8e95fe52-02f3-b3bb-d623-8668ee2c95ca
+2019-03-16 17:35:46.876 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 7128 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 17:35:46.879 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 17:35:50.457 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 3.977 seconds (JVM running for 4.374)
+2019-03-16 17:35:56.851 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 17:35:56.858 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 17:35:56.859 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 17:36:02.823 INFO  [DESKTOP-D1PEDRM] Update order start. 
+2019-03-16 17:36:02.823 INFO  [DESKTOP-D1PEDRM] videoId = 03bf3084400547abba1fe775a6511798
+2019-03-16 17:36:02.823 INFO  [DESKTOP-D1PEDRM] price = 1.0
+2019-03-16 17:36:02.823 INFO  [DESKTOP-D1PEDRM] domainId = 35bf2aab55a14b44973d74e6db8404cd
+2019-03-16 17:36:02.823 INFO  [DESKTOP-D1PEDRM] platform = payjs
+2019-03-16 17:38:01.910 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 11804 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 17:38:01.912 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 17:38:05.929 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.395 seconds (JVM running for 4.778)
+2019-03-16 17:38:31.594 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 17:38:31.603 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 17:38:31.603 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 17:38:35.177 INFO  [DESKTOP-D1PEDRM] VideoDomainController
+2019-03-16 17:38:35.179 INFO  [DESKTOP-D1PEDRM] Query video list execute, offset = 0
+2019-03-16 17:38:35.179 INFO  [DESKTOP-D1PEDRM] Query video list execute, limit = 10
+2019-03-16 17:38:39.775 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, videoId = 03bf3084400547abba1fe775a6511798
+2019-03-16 17:38:39.775 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, user ip = 0:0:0:0:0:0:0:1
+2019-03-16 17:38:39.775 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, host = localhost:7777
+2019-03-16 17:38:39.775 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, uid = 8e95fe52-02f3-b3bb-d623-8668ee2c95ca
+2019-03-16 17:38:39.815 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Create order.
+2019-03-16 17:38:40.118 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.orderId = 029def5719c042d6ad2e4e88339c3d15
+2019-03-16 17:38:40.118 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.orderNumber = 1552729119816950
+2019-03-16 17:38:40.118 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, Order.status = UN_PAID
+2019-03-16 17:38:40.118 INFO  [DESKTOP-D1PEDRM] OrderV2Controller Make order, payUrl = https://payjs.cn/api/cashier?mchid=1524053761&notify_url=http://www.lincolor112.live/v2/order/payjs/complete&callback_url=http://localhost:7777/manager/video/v2/play-forward.html?orderId=029def5719c042d6ad2e4e88339c3d15&out_trade_no=029def5719c042d6ad2e4e88339c3d15&total_fee=100&sign=37C4B90E615924418B71B384C57FE679
+2019-03-16 17:39:17.499 INFO  [DESKTOP-D1PEDRM] Starting VideoApplication on DESKTOP-D1PEDRM with PID 1200 (Z:\workspace-wolf\wolf-server-video\target\classes started by tianya in Z:\workspace-wolf\wolf-server-video)
+2019-03-16 17:39:17.501 INFO  [DESKTOP-D1PEDRM] No active profile set, falling back to default profiles: default
+2019-03-16 17:39:21.336 INFO  [DESKTOP-D1PEDRM] Started VideoApplication in 4.268 seconds (JVM running for 4.689)

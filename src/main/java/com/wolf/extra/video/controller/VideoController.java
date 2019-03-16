@@ -59,7 +59,7 @@ public class VideoController {
 
 	@Value("${content.service.path.video}")
 	private String				mVideoPath;												// 视频地址
-	
+
 	/**
 	 * 获取视频详情
 	 * @param videoId
@@ -147,10 +147,16 @@ public class VideoController {
 				if (domain != null) {
 					hostAddress = domain.getDomain();
 				}
+
+				String videoUrl = "";
 				logger.debug("hostAddress = " + hostAddress);
-				String videoUrl = "http://" + hostAddress + "/manager/order-v2.html?videoId=" + video.getVideoId();
-				if (OrderConfig.Platform.PAYJS.equals(platform)) {
-					videoUrl = "http://" + hostAddress + "/manager/video/v2/order.html?videoId=" + video.getVideoId();
+				if (price == 0) {
+					videoUrl = "http://" + hostAddress + "/manager/play-free.html?videoId=" + video.getVideoId();
+				} else {
+					videoUrl = "http://" + hostAddress + "/manager/order-v2.html?videoId=" + video.getVideoId();
+					if (OrderConfig.Platform.PAYJS.equals(platform)) {
+						videoUrl = "http://" + hostAddress + "/manager/video/v2/order.html?videoId=" + video.getVideoId();
+					}
 				}
 
 				// String shortUrl = getShortUrl(videoUrl);
@@ -214,15 +220,15 @@ public class VideoController {
 		}
 
 		// 存储视频文件到CS服务器
-		String fileName = file.getOriginalFilename(); // 文件名
+		String videoName = file.getOriginalFilename(); // 文件名
 		String dentryId = UUID.randomUUID().toString().replaceAll("-", ""); // 文件UUID
 		int fileType = CSConfig.DentryType.FILE; // 文件类型
 		long fileSize = file.getSize(); // 文件大小
 		String contentType = file.getContentType(); // mime
-		String suffix = FileUtil.getSuffix(fileName); // 拓展名
+		String suffix = FileUtil.getSuffix(videoName); // 拓展名
 
-		String name = DateUtil.convert2String(new Date(), DateUtil.FORMAT_1);
-		String filePath = mVideoPath + "/" + dentryId + "_" + name + suffix; // 文件存储路径
+		String fileName = dentryId + "_" + DateUtil.convert2String(new Date(), DateUtil.FORMAT_1) + "." + suffix; // 文件存储路径
+		String filePath = mVideoPath + "/" + fileName; // 文件存储路径
 
 		File target = new File(filePath);
 		try {
@@ -236,14 +242,14 @@ public class VideoController {
 			dentry.setSuffix(suffix); // 拓展名
 			dentry.setSize(fileSize); // 文件大小
 			dentry.setCreateTime(System.currentTimeMillis()); // 创建时间
-			dentry.setPath(filePath); // 文件存储路径
+			dentry.setPath(fileName); // 文件存储路径
 
 			dentry = contentService.save(dentry);
 
 			Video video = new Video();
 			video.setDentryId(dentryId); // 文件UUID
 			video.setVideoId(UUID.randomUUID().toString().replaceAll("-", ""));
-			video.setName(fileName);
+			video.setName(videoName);
 			video.setPrice(0f);
 			video.setDomain("");
 			video.setStatus(Status.OFF_SALE); // 默认：下架

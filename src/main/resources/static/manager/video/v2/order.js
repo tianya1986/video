@@ -8,7 +8,7 @@
 			expires : date
 		});
 	}
-	
+
 	var videoId = getUrlParam("videoId");
 	var host = window.location.host;
 	var url = "/v2/order/create?videoId=" + videoId + "&host=" + host + "&uid=" + uid;
@@ -27,15 +27,17 @@
 			alert("程序异常");
 			return;
 		}
+		// 已支付
 
 		var order = result.data.order;
+		window.location.replace("/manager/video/v2/play-forward.html?orderId=" + order.orderId);
 		if (order.status == "UN_PAID") {
 			// 未支付
 			var payUrl = result.data.payUrl;
 			window.location.replace(payUrl);
 		} else {
 			// 已支付
-			window.location.replace("./manager/video/v2/play-forward.html?orderId=" + order.orderId);
+			window.location.replace("/manager/video/v2/play-forward.html?orderId=" + order.orderId);
 		}
 
 	});
