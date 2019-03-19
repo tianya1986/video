@@ -112,7 +112,7 @@ public class VideoDaoImpl implements VideoDao {
     public Result<Video> query(int offset, int limit, String status) throws VideoException {
         // 创建排序模板Sort
         int page = PagingUtil.getPage(offset, limit);
-        Sort sort = Sort.by(Sort.Direction.ASC, "createTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
 
         // 创建分页模板Pageable
         Pageable pageable = PageRequest.of(page, limit, sort);

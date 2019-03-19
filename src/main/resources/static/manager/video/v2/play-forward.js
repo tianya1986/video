@@ -1,5 +1,6 @@
 (function a () {
 	var orderId = getUrlParam("orderId");
+	if (orderId == null || orderId == "") { return; }
 
 	var total = 100;
 	var count = 0;
@@ -22,15 +23,6 @@
 		}
 	}, 1000);
 
-	var localOrderId = $.cookie("orderId");
-	if (localOrderId == null) {
-		var date = new Date();
-		date.setTime(date.getTime() + 1000 * 60);
-		$.cookie("orderId", orderId, {
-			expires : date
-		})
-	}
-
 	// 获取url中的参数
 	function getUrlParam (name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象
@@ -38,4 +30,5 @@
 		if (r != null) return unescape(r[2]);
 		return null; // 返回参数值
 	}
+
 })();

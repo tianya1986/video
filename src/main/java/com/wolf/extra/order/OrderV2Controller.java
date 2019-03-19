@@ -32,35 +32,47 @@ import com.wolf.paging.Result;
 public class OrderV2Controller {
 
 	@RequestMapping(value = "/{orderId}")
-	public Response getOrder(@PathVariable("orderId") String orderId) {
-		logger.info(TAG + " Get order info execute, order id = " + orderId);
+	public Response getOrder(HttpServletRequest request,
+			@PathVariable("orderId") String orderId,
+			@RequestParam(name = "uid", required = true) String uid) {
+		String userIpAddress = NetworkUtil.getIpAddress(request);
+		logger.info(TAG + " ========= Get order start ========= ");
+		logger.info(TAG + " Get order, order uid = " + uid);
+		logger.info(TAG + " Get order, user ip = " + userIpAddress); // 用户ip
 		try {
 			OrderV2 order = orderV2Service.load(orderId);
 			if (order == null) {
+				logger.error(TAG + " Get order, 没有找到订单！  ");
+				return new Response(Response.ERROR, "没有找到订单！");
+			}
+
+			if (!order.getUid().equals(uid)) {
+				logger.error(TAG + " Get order, 订单编码错误！ orderNumber = " + uid + ", order.uid = " + order.getUid());
 				return new Response(Response.ERROR, "没有找到订单！");
 			}
 
 			if (!OrderV2.Status.PAID.equals(order.getStatus())) {
 				// 订单未完成支付
+				logger.error(TAG + " Get order, 订单未完成！ ");
 				return new Response(Response.ERROR, "订单未完成！");
 			}
 
 			// 判断订单是否过期
 			boolean isExpire = OrderHelper.isExpire(order);
 			if (isExpire) {
-				logger.info(TAG + " Get order info execute, is expire = " + isExpire);
+				logger.info(TAG + " Get order, is expire = " + isExpire);
 				return new Response(Response.ERROR, "支付过期！");
 			}
 
 			Video video = videoService.load(order.getVideoId());
 			if (video == null) {
-				logger.info(TAG + " Get order info execute, video not exists, videoId = " + order.getVideoId());
+				logger.info(TAG + " Get order, video not exists, videoId = " + order.getVideoId());
 				return new Response(Response.ERROR, "找不到视频");
 			}
 
 			Dentry denty = contentService.load(video.getDentryId());
 			if (denty == null) {
-				logger.info(TAG + " Get order info execute, video not exists, videoId = " + order.getVideoId());
+				logger.info(TAG + " Get order, video not exists, videoId = " + order.getVideoId());
 				return new Response(Response.ERROR, "找不到视频");
 			}
 
@@ -95,16 +107,17 @@ public class OrderV2Controller {
 			@RequestParam(name = "host", required = false) String host,
 			@RequestParam(name = "uid", required = false) String uid) {
 		String userIpAddress = NetworkUtil.getIpAddress(request);
-
-		logger.info(TAG + " Make order, videoId = " + videoId);
+		logger.info(TAG + " ========= Make order start ========= ");
 		logger.info(TAG + " Make order, user ip = " + userIpAddress); // 用户ip
-		logger.info(TAG + " Make order, host = " + host); // host
 		logger.info(TAG + " Make order, uid = " + uid); // 用户id
+		logger.info(TAG + " Make order, videoId = " + videoId);
+		logger.info(TAG + " Make order, host = " + host); // host
 
 		try {
 			Video video = videoService.load(videoId);
 			if (video == null) {
 				// 提示：找不到您要播放的视频。
+				logger.error(TAG + " Make order fail, can not found video");
 				return ResponseHelper.errorVideoNotFound();
 			}
 
@@ -145,7 +158,7 @@ public class OrderV2Controller {
 
 			return new Response(data);
 		} catch (VideoException e) {
-			logger.error(TAG + " Create order error, " + e);
+			logger.error(TAG + " Make order error, " + e);
 			return new Response(Response.ERROR, e.getMessage());
 		}
 	}
@@ -158,21 +171,30 @@ public class OrderV2Controller {
 	@RequestMapping(value = "/{orderId}/validate", method = RequestMethod.POST)
 	public Response validateOrder(HttpServletRequest request,
 			@PathVariable("orderId") String orderId) {
+		String userIpAddress = NetworkUtil.getIpAddress(request);
+		logger.info(TAG + " ========= Validate Order start ========= ");
+		logger.info(TAG + " Validate order, orderId = " + orderId);
+		logger.info(TAG + " Validate order, user ip = " + userIpAddress); // 用户ip
+
 		try {
 			OrderV2 order = orderV2Service.load(orderId);
 			if (order == null) {
+				logger.error(TAG + " Validate order, can not found Order orderId = " + orderId);
 				return new Response(Response.ERROR, "找不到订单");
 			}
+
 			if (OrderV2.Status.PAID.equals(order.getStatus())) {
 				// 完成支付
-				return new Response("");
+				logger.error(TAG + " Validate Order success.");
+				return new Response(order.getOrderNumber());
+			} else {
+				logger.error(TAG + " Validate Order, waiting callback.");
 			}
 		} catch (VideoException e) {
 			e.printStackTrace();
-			logger.error(TAG + " Order validated, load order error, " + e);
+			logger.error(TAG + " Validate Order error, load order error, " + e);
 			return new Response(Response.ERROR, "load order error");
 		}
-
 		return new Response(Response.ERROR, "未支付");
 	}
 
@@ -183,7 +205,6 @@ public class OrderV2Controller {
 	private OrderV2Service		orderV2Service;											// 订单服务
 	@Autowired
 	private VideoService		videoService;												// 视频服务
-
 	@Autowired
 	private ContentService		contentService;
 }

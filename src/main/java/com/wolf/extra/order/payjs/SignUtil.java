@@ -19,7 +19,7 @@ public class SignUtil {
 			String orderNumber,
 			String body,
 			String host) {
-		String notifyUrl = "http://www.lincolor112.live/v2/order/payjs/complete";
+		String notifyUrl = "http://www.zuixin2.live/v2/order/payjs/complete";
 		String callbackUrl = "http://" + host + "/manager/video/v2/play-forward.html?orderId=" + orderId;
 		
 		Map<String, String> map = new HashMap<>();

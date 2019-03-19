@@ -2,8 +2,9 @@
 	var orderId = getUrlParam("orderId");
 	var screenWidth = parseInt(window.screen.width);
 	var screenHeight = parseInt(window.screen.height);
-	
-	$.get("/v2/order/" + orderId, function (data , status) {
+
+	var uid = $.cookie("uid");
+	$.get("/v2/order/" + orderId + "?uid=" + uid, function (data , status) {
 		if (data.status != '200') {
 			alert(data.message);
 			window.location.back();
